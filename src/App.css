@@ -102,7 +102,7 @@ img {
   padding: 40px;
 }
 
-.register {
+.register .meetings {
   display: grid;
   grid-template-columns: 80% 20%;
   align-items: center;
@@ -656,3 +656,4 @@ video .pic img {
 .crud-color-c.selected .crud-color:before {
   display: block;
 }
+
