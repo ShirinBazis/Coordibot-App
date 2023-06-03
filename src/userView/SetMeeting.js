@@ -2,25 +2,43 @@ import React, { useState } from 'react';
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
 // import { Eventcalendar, snackbar, setOptions, Popup, Button, Input, Textarea, Switch, Datepicker, SegmentedGroup, SegmentedItem } from '@mobiscroll/react';
 import Input from '../form/Input';
+import Select from '../form/Select';
 import axios from 'axios';
 
 
 
-export default function UserView({ currentUser }) {
-  const [contacts, setContacts] = useState([
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Jane Smith' },
-    { id: 3, name: 'Robert Johnson' },
+export default function SetMeeting({ currentUser }) {
+
+  const isBusy = ""
+  const isBusyMessage = isBusy==""? "The robot is free right now!" : "The robot is busy right now"
+
+  const options = [
+    { label: "First", value: 1 },
+    { label: "Second", value: 2 },
+    { label: "Third", value: 3 },
+    { label: "Fourth", value: 4 },
+    { label: "Fifth", value: 5 },
+  ];
+
+  const [value1, setValue1] = useState([]);
+  const [value2, setValue2] = useState('');
+
+
+
+  const [lecturers, setLecturers] = useState([
+    { room: 1, name: 'John Doe' },
+    { room: 2, name: 'Jane Smith' },
+    { room: 3, name: 'Robert Johnson' },
   ]);
-  const [selectedContacts, setSelectedContacts] = useState('');
-  
-  const handleContactChange = (event) => {
+  const [selectedLecturers, setSelectedLecturers] = useState('');
+
+  const handleLecturersChange = (event) => {
     const { value, checked } = event.target;
     if (checked) {
-      setSelectedContacts((prevSelected) => [...prevSelected, value]);
+      setSelectedLecturers((prevSelected) => [...prevSelected, value]);
     } else {
-      setSelectedContacts((prevSelected) =>
-        prevSelected.filter((contact) => contact !== value)
+      setSelectedLecturers((prevSelected) =>
+        prevSelected.filter((lecturer) => lecturer !== value)
       );
     }
   };
@@ -52,19 +70,14 @@ export default function UserView({ currentUser }) {
     <form id="myForm" className='cube center-form'>
       <h1>Set a meeting</h1>
       <hr></hr>
-      {/* {(error === 'wrong') ? (<div className="alert alert-danger">Wrong password or username</div>) : ""}
-            {(error === 'network') ? (<div className="alert alert-danger">Can't reach server</div>) : ""}
-             */}
       <div className='meetings'>
         <Input inputName="Meeting Title" inputType="text" text='Meeting Title' />
         <Input inputName="Description" inputType="text" text='Description' />
         <Input inputName="Creator" inputType="text" text='Creator' />
-        {/* <Input inputName="Invited" inputType="text" text='Invited' /> */}
-        <div className="row mb-3">
-          <label className="col-sm-4 col-form-label" htmlFor="Invited">
-            Invited
-          </label>
-        <div className="col-sm-6">
+        <Select multiple options={options} value={value1} onChange={o => setValue1(o)} label="Invited" />
+        <Select options={options} value={value2} onChange={o => setValue2(o)} label="Location" />
+        {/* <Select multiple="" value={selectedContacts} onChange={handleContactChange} /> */}
+
         {/* <select className="form-control" id="Invited" value={selectedContacts} onChange={handleContactChange} multiple>
               {contacts.map((contact) => (
                 <option key={contact.id} value={contact.name}>
@@ -72,28 +85,19 @@ export default function UserView({ currentUser }) {
                 </option>
               ))}
             </select> */}
-            {contacts.map((contact) => (
-              <div key={contact.id} className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id={`contact-${contact.id}`}
-                  value={contact.name}
-                  checked={selectedContacts.includes(contact.name)}
-                  onChange={handleContactChange}
-                />
-                <label
-                  className="form-check-label"
-                  htmlFor={`contact-${contact.id}`}
-                >
-                  {contact.name}
-                </label>
-              </div>
-            ))}
+
+        {/* </div>
+        </div> */}
+        <div className="row mb-3">
+          <label className="col-sm-4 col-form-label">Free/Busy:</label>
+          <div className="col-sm-6">
+            <div className="form-check form-switch">
+              {/* without the word checked = busy */}
+              <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked={isBusy} disabled />
+              <label className="form-check-label" htmlFor="flexSwitchCheckCheckedDisabled">{isBusyMessage}</label>
+            </div>
           </div>
         </div>
-        <Input inputName="Location" inputType="text" text='Location' />
-
       </div>
       <div>
         <input type="button" value="Save" className="btn" onClick={save}></input>
