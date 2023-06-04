@@ -68,7 +68,8 @@ export default function SetMeeting({ currentUser }) {
     var Description = document.getElementById('Description').value;
     var Creator = document.getElementById('Creator').value;
     var Invited = optionalLecturers;
-    var Location = optionalRooms;
+    const InvitedRooms = Invited.map(item => item.room);
+    var LocationRoom = optionalRooms.room;
 
     // if there is no values in invited and location, don't send request
     if(Invited.length === 0 || Location=='') {
@@ -81,8 +82,8 @@ export default function SetMeeting({ currentUser }) {
         MeetingTitle,
         Description,
         Creator,
-        Invited,
-        Location
+        InvitedRooms,
+        LocationRoom
       });
 
       console.log(response.data);
