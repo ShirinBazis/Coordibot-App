@@ -56,40 +56,6 @@ img {
   height: 40px;
 }
 
-.messages {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font: 16px/1.3 sans-serif;
-  height: 300px;
-  list-style-type: none;
-  margin: 0 auto;
-  padding: 8px;
-  overflow: auto;
-  width: 200px;
-}
-
-.messages li {
-  background: var(--secondColorFaded);
-  border-radius: 8px;
-  padding: 8px;
-  margin: 2px 8px 2px 0;
-}
-
-.messages li.ours {
-  align-self: flex-end;
-  margin: 2px 0 2px 8px;
-  background-color: var(--firstColorFaded);
-}
-
-.messages .date {
-  background: var(--niceWhite);
-  border-radius: 8px;
-  align-self: center;
-  padding: 8px;
-  margin-bottom: 10px;
-}
-
 .borderW {
   background-color: var(--niceWhite);
   padding: 1rem;
@@ -100,6 +66,13 @@ img {
   margin-top: 13%;
   width: 50%;
   padding: 40px;
+}
+
+.meetings-form {
+  margin: auto;
+  margin-top: 13%;
+  width: 100%;
+  padding: 60px;
 }
 
 .register .meetings {
@@ -147,70 +120,6 @@ img {
   align-items: center;
 }
 
-.user-side {
-  width: 100%;
-  height: calc(100% - 60px);
-  background: var(--niceWhite);
-  border-radius: 10px 0 0 10px;
-  box-shadow: -5px 5px 10px rgba(119, 119, 119, 0.5);
-  overflow-y: auto;
-}
-
-.contact-side {
-  height: 100%;
-  width: 100%;
-  border-radius: 10px;
-  display: grid;
-  grid-template-rows: 8% 84% 8%;
-  box-shadow: 5px 5px 15px rgba(119, 119, 119, 0.5);
-}
-
-.massage-box {
-  width: 100%;
-  height: 100%;
-}
-
-.user-profile {
-  background-color: var(--niceWhite);
-  height: 60px;
-  display: grid;
-  grid-template-columns: 2% 60% 10%;
-  justify-content: space-around;
-  width: 100%;
-  align-items: center;
-  border-style: solid;
-  border-top: 0;
-  border-right: 0;
-  border-left: 0;
-  border-color: var(--firstColor);
-}
-
-.new-contact-btn {
-  padding-right: 5%;
-}
-
-#contact-profile {
-  display: flex;
-  align-items: center;
-  font-weight: 600;
-  font-size: 16px;
-  color: rgb(54, 54, 54);
-  border-style: solid;
-  width: 100%;
-  background-color: var(--niceWhite);
-  border-radius: 10px 10px 0 0;
-  border-color: var(--firstColor);
-}
-
-#contact-profile .pic {
-  margin-left: 20px;
-  margin-right: 15px;
-}
-
-
-#contact-box {
-  background: var(--niceWhite);
-}
 
 #bottom-bar {
   width: 100%;
@@ -263,64 +172,6 @@ img {
   cursor: pointer;
 }
 
-#user-fullName {
-  width: 100%;
-  padding-left: 5%;
-  color: rgb(54, 52, 52);
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.contact {
-  height: 75px;
-  margin-bottom: 0.5px;
-  cursor: pointer;
-  font-size: 100%;
-}
-
-/* Change the background color of the other contact before switching to his chat */
-.contact.person:hover {
-  background-color: #e5e7e8;
-}
-
-hr {
-  border: 0;
-  margin-top: 5px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-}
-
-/* #massage-box {
-  background-image: url(../public/app.webp);
-  background-size: 400px;
-  border-style: solid;
-  border-top: 1.5px;
-  border-color: var(--firstColor);
-} */
-
-.message-time {
-  font-size: 0.7rem;
-}
-
-.hidden {
-  display: none;
-  color: var(--firstColor);
-}
-
-.message-time {
-  margin-top: 2px;
-}
-
-#massage-box li {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  max-width: 70%;
-  overflow-wrap: break-word;
-}
-
-#massage-box .ours {
-  display: block;
-}
 
 .hidden1 {
   display: none;
@@ -342,110 +193,6 @@ hr {
   font-weight: 600;
 }
 
-
-.bi.bi-person-plus {
-  margin-top: 2px;
-  color: var(--firstColor);
-  cursor: pointer;
-}
-
-.bi.bi-send {
-  color: var(--firstColor);
-  cursor: pointer;
-}
-
-.bi.bi-paperclip {
-  color: var(--firstColor);
-  cursor: pointer;
-}
-
-#chat,
-#post-photo,
-#retake-photo,
-#stop-record-video {
-  display: none;
-}
-
-#add-contact {
-  justify-content: space-between;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.contact-add-btn {
-  font-size: 14px;
-  border-radius: 2em;
-  padding: 0.6em 1.2em;
-  cursor: pointer;
-  background: none;
-  color: var(--firstColor);
-  border: 1px solid;
-  letter-spacing: 1px;
-  font-family: "Source Sans Pro", sans-serif;
-  color: var(--firstColor);
-  border: var(--firstColor) 1px solid;
-  transition: 250ms ease-out;
-  margin: 5px;
-}
-
-.contact-add-btn:hover,
-.btn:focus {
-  color: var(--niceWhite);
-  background: var(--firstColor);
-}
-
-/* Dropup content (Hidden by Default) */
-#dropup-content {
-  display: none;
-  position: absolute;
-  background-color: var(--niceWhite);
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  bottom: 20%;
-}
-
-@media all and (max-height: 800px) {
-  #dropup-content {
-    bottom: calc(50vh - 240px);
-  }
-}
-
-/* Links inside the dropup */
-#dropup-content a {
-  color: black;
-  display: block;
-  padding: 10px;
-  cursor: pointer;
-}
-
-/* Change color of dropup links on hover */
-#dropup-content a:hover {
-  background-color: #e5e7e8;
-}
-
-.bottom-bar-options {
-  height: 100%;
-}
-
-#chat-item1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-}
-
-#chat-item2 {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#chat-item3 {
-  cursor: pointer;
-}
 
 .person {
   position: relative;
@@ -515,82 +262,7 @@ label {
   margin-right: 20px;
 }
 
-.modal-footer.center {
-  display: flex;
-  justify-content: center;
-}
 
-#input-result {
-  margin-top: 10px;
-}
-
-.record-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 200px;
-  width: 480px;
-}
-
-#start,
-#stop {
-  margin: 20px 20px 20px 20px;
-  max-width: 300px;
-  padding: 10px 20px;
-  border: 2px solid var(--firstColor);
-  font-size: 20px;
-  color: var(--firstColor);
-  background-color: transparent;
-}
-
-audio {
-  border: 1px solid var(--firstColor);
-  border-radius: 30px;
-}
-
-#preview-video-div,
-.preview-pic-div {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-}
-
-.massage-box li video,
-.massage-box li img,
-#preview-video-div video,
-.preview-pic-div img,
-#camera-canvas,
-#camera-mode,
-#camera-zone video {
-  width: 360px;
-  height: 270px;
-}
-
-video .pic img {
-  border-radius: 50%;
-}
-
-.flex-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.add-contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.addContactInput {
-  width: 80%;
-  margin-bottom: 12px;
-}
 
 /* userview page */
 

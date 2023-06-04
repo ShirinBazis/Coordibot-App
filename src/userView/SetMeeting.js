@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
-// import { Eventcalendar, snackbar, setOptions, Popup, Button, Input, Textarea, Switch, Datepicker, SegmentedGroup, SegmentedItem } from '@mobiscroll/react';
 import Input from '../form/Input';
-import Select, { SelectOption } from '../form/Select';
+import Select from '../form/Select';
 import axios from 'axios';
+import { SettingsModal } from './Modals';
 
 const lecturers = [
   { name: "Talya Eden", room: 303 },
@@ -92,7 +92,8 @@ export default function SetMeeting({ currentUser }) {
   }
 
   return (
-    <form id="myForm" className='cube center-form'>
+    <div>
+    <form id="myForm" className='cube meetings-form'>
       <h1>Set a meeting</h1>
       <hr></hr>
       <div className='meetings'>
@@ -118,5 +119,10 @@ export default function SetMeeting({ currentUser }) {
       <input type="button" value="Save" className="btn" onClick={save}></input>
       </div>
     </form>
+
+    <img src='settings.png' style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target="#settings-modal"/>
+    <SettingsModal />
+
+    </div>
   )
 }
