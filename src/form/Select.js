@@ -29,7 +29,8 @@ export default function Select({ multiple, value, onChange, options, label }) {
     const containerRef = useRef(null);
 
     function clearOptions() {
-        multiple ? onChange([]) : onChange(undefined)
+        // multiple ? onChange([]) : onChange(undefined)
+        onChange([])
     }
 
     function selectOption(option) {
@@ -108,7 +109,8 @@ export default function Select({ multiple, value, onChange, options, label }) {
                                 <button
                                     key={v.room}
                                     onClick={e => {
-                                        e.stopPropagation()
+                                        // e.stopPropagation()
+                                        e.preventDefault();
                                         selectOption(v)
                                     }}
                                     className={styles["option-badge"]}
@@ -123,7 +125,8 @@ export default function Select({ multiple, value, onChange, options, label }) {
                         ?
                         <button
                             onClick={e => {
-                                e.stopPropagation()
+                                // e.stopPropagation()
+                                e.preventDefault();
                                 clearOptions()
                             }}
                             className={styles["clear-btn"]}

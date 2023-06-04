@@ -69,6 +69,13 @@ export default function SetMeeting({ currentUser }) {
     var Creator = document.getElementById('Creator').value;
     var Invited = optionalLecturers;
     var Location = optionalRooms;
+
+    // if there is no values in invited and location, don't send request
+    if(Invited.length === 0 || Location=='') {
+      return;
+    }
+
+    // send request to the robot
     try {
       const response = await axios.post('https://localhost:3000', {
         MeetingTitle,
