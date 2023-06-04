@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react"
 import styles from "../select.module.css"
 
 export const SelectOption = {
-    label: "",
-    value: ""
+    name: "",
+    room: ""
 }
 
 const MultipleSelectProps = {
@@ -34,7 +34,8 @@ export default function Select({ multiple, value, onChange, options, label }) {
 
     function selectOption(option) {
         if (multiple) {
-            if (value.includes(option)) {
+            // this option has already been selected before
+            if (value.some((o) => o.room === option.room)) {
                 onChange(value.filter((o) => o !== option))
             } else {
                 onChange([...value, option])
@@ -105,24 +106,24 @@ export default function Select({ multiple, value, onChange, options, label }) {
                         {multiple
                             ? value.map(v => (
                                 <button
-                                    key={v.value}
+                                    key={v.room}
                                     onClick={e => {
                                         e.stopPropagation()
                                         selectOption(v)
                                     }}
                                     className={styles["option-badge"]}
                                 >
-                                    {v.label}
+                                    {v.name}
                                     <span className={styles["remove-btn"]}>&times;</span>
                                 </button>
                             ))
-                            : value?.label}
+                            : value?.room}
                     </span>
                     {multiple
                         ?
                         <button
                             onClick={e => {
-                                // e.stopPropagation()
+                                e.stopPropagation()
                                 clearOptions()
                             }}
                             className={styles["clear-btn"]}
@@ -141,11 +142,11 @@ export default function Select({ multiple, value, onChange, options, label }) {
                                     setIsOpen(false)
                                 }}
                                 onMouseEnter={() => setHighlightedIndex(index)}
-                                key={option.value}
+                                key={option.room}
                                 className={`${styles.option} ${isOptionSelected(option) ? styles.selected : ""
                                     } ${index === highlightedIndex ? styles.highlighted : ""}`}
                             >
-                                {option.label}
+                               {multiple ? option.name : option.room}
                             </li>
                         ))}
                     </ul>

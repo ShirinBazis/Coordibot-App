@@ -2,55 +2,73 @@ import React, { useState } from 'react';
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
 // import { Eventcalendar, snackbar, setOptions, Popup, Button, Input, Textarea, Switch, Datepicker, SegmentedGroup, SegmentedItem } from '@mobiscroll/react';
 import Input from '../form/Input';
-import Select from '../form/Select';
+import Select, { SelectOption } from '../form/Select';
 import axios from 'axios';
 
+const lecturers = [
+  { name: "Talya Eden", room: 303 },
+  { name: "Liam Roditty", room: 304 },
+  { name: "Ester Ezra", room: 305 },
+  { name: "Ely Porat", room: 306 },
+  { name: "Arnold Filtser", room: 307 },
+  { name: "Tsvi Kopelowitz", room: 308 },
+  { name: "Amihood Amir", room: 310 },
+  { name: "Sarit Kraus", room: 315 },
+  { name: "David Sarne", room: 316 },
+  { name: "Yoni Zohar", room: 319 },
+  { name: "Noa Agmon", room: 320 },
+  { name: "Gal Kaminka", room: 321 },
+  { name: "Reuth Mirsky", room: 322 },
+  { name: "Alex Shleyfman", room: 323 },
+  { name: "Hana Weitman", room: 324 },
+];
+
+const rooms = [
+  { name: "", room: 301 },
+  { name: "", room: 302 },
+  { name: "Talya Eden", room: 303 },
+  { name: "Liam Roditty", room: 304 },
+  { name: "Ester Ezra", room: 305 },
+  { name: "Ely Porat", room: 306 },
+  { name: "Arnold Filtser", room: 307 },
+  { name: "Tsvi Kopelowitz", room: 308 },
+  { name: "", room: 309 },
+  { name: "Amihood Amir", room: 310 },
+  { name: "", room: 311 },
+  { name: "", room: 312 },
+  { name: "", room: 313 },
+  { name: "", room: 314 },
+  { name: "Sarit Kraus", room: 315 },
+  { name: "David Sarne", room: 316 },
+  { name: "", room: 317 },
+  { name: "", room: 318 },
+  { name: "Yoni Zohar", room: 319 },
+  { name: "Noa Agmon", room: 320 },
+  { name: "Gal Kaminka", room: 321 },
+  { name: "Reuth Mirsky", room: 322 },
+  { name: "Alex Shleyfman", room: 323 },
+  { name: "Hana Weitman", room: 324 },
+  { name: "", room: 325 },
+  { name: "", room: 327 },
+  { name: "", room: 328 },
+  { name: "", room: 329 },
+  { name: "", room: 331 },
+];
 
 
 export default function SetMeeting({ currentUser }) {
+  const [optionalLecturers, setLecturers] = useState([]);
+  const [optionalRooms, setRoom] = useState('');
 
   const isBusy = ""
   const isBusyMessage = isBusy==""? "The robot is free right now!" : "The robot is busy right now"
-
-  const options = [
-    { label: "First", value: 1 },
-    { label: "Second", value: 2 },
-    { label: "Third", value: 3 },
-    { label: "Fourth", value: 4 },
-    { label: "Fifth", value: 5 },
-  ];
-
-  const [value1, setValue1] = useState([]);
-  const [value2, setValue2] = useState('');
-
-
-
-  const [lecturers, setLecturers] = useState([
-    { room: 1, name: 'John Doe' },
-    { room: 2, name: 'Jane Smith' },
-    { room: 3, name: 'Robert Johnson' },
-  ]);
-  const [selectedLecturers, setSelectedLecturers] = useState('');
-
-  const handleLecturersChange = (event) => {
-    const { value, checked } = event.target;
-    if (checked) {
-      setSelectedLecturers((prevSelected) => [...prevSelected, value]);
-    } else {
-      setSelectedLecturers((prevSelected) =>
-        prevSelected.filter((lecturer) => lecturer !== value)
-      );
-    }
-  };
-
 
   const save = async () => {
     var MeetingTitle = document.getElementById('Meeting Title').value;
     var Description = document.getElementById('Description').value;
     var Creator = document.getElementById('Creator').value;
-    var Invited = document.getElementById('Invited').value;
-    var Location = document.getElementById('Location').value;
-
+    var Invited = optionalLecturers;
+    var Location = optionalRooms;
     try {
       const response = await axios.post('https://localhost:3000', {
         MeetingTitle,
@@ -60,7 +78,7 @@ export default function SetMeeting({ currentUser }) {
         Location
       });
 
-      console.log(response.data); // Log the response if needed
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -74,20 +92,9 @@ export default function SetMeeting({ currentUser }) {
         <Input inputName="Meeting Title" inputType="text" text='Meeting Title' />
         <Input inputName="Description" inputType="text" text='Description' />
         <Input inputName="Creator" inputType="text" text='Creator' />
-        <Select multiple options={options} value={value1} onChange={o => setValue1(o)} label="Invited" />
-        <Select options={options} value={value2} onChange={o => setValue2(o)} label="Location" />
-        {/* <Select multiple="" value={selectedContacts} onChange={handleContactChange} /> */}
+        <Select multiple options={lecturers} value={optionalLecturers} onChange={o => setLecturers(o)} label="Invited" />
+        <Select options={rooms} value={optionalRooms} onChange={o => setRoom(o)} label="Location" />
 
-        {/* <select className="form-control" id="Invited" value={selectedContacts} onChange={handleContactChange} multiple>
-              {contacts.map((contact) => (
-                <option key={contact.id} value={contact.name}>
-                  {contact.name}
-                </option>
-              ))}
-            </select> */}
-
-        {/* </div>
-        </div> */}
         <div className="row mb-3">
           <label className="col-sm-4 col-form-label">Free/Busy:</label>
           <div className="col-sm-6">
@@ -100,7 +107,8 @@ export default function SetMeeting({ currentUser }) {
         </div>
       </div>
       <div>
-        <input type="button" value="Save" className="btn" onClick={save}></input>
+
+      <input type="button" value="Save" className="btn" onClick={save}></input>
       </div>
     </form>
   )
