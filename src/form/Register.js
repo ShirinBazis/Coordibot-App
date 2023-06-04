@@ -59,34 +59,7 @@ export default function Register() {
             setError('lettersN');
             return 0;
         }
-        // const res = await axios(
-        //     {
-        //         method: 'post',
-        //         url: 'https://localhost:7290/api/Users/Register',
-        //         headers: {
-        //             'content-Type': 'application/json',
-        //         },
-        //         data:
-        //         {
-        //             username: registerUser,
-        //             nickname: registerNickname,
-        //             password: registerPassword,
-        //             Picture: registerPicture.split('/').at(-1) == 'contactImage.webp' ? 'avatar' : registerPicture,
-        //         }
-        //     }).catch(res => {
-        //         //error case
-        //         if (res == "Error: Request failed with status code 400") {
-        //             setError('existedUsername');
-        //         }
-        //         else if (res == "Error: Network Error") {
-        //             setError('network');
-        //         }
-        //         else {
-        //             setError('error');
-        //         }
-        //         return 2;
-        //     });
-        // if (res == 2) { return 0; }
+       
         return 1;
     }
 

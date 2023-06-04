@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import Register from "./form/Register";
 import Login from "./form/Login";
-import UserView from "./userView/UserView"
+import SetMeeting from "./userView/SetMeeting"
 import './App.css';
 
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Login setCurrentUser={setCurrentUser} />}></Route>
                 <Route path="/register" element={<Register />}></Route>
-                <Route path="/meetings" element={<UserView currentUser={currentUser} />}></Route>
+                <Route path="/meetings" element={<SetMeeting currentUser={currentUser} />}></Route>
             </Routes>
         </Router>
     );
