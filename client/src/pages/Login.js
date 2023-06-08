@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import Input from './Input';
+import Input from '../tags/Input';
 import axios from 'axios';
-import ResetHidden from './ResetHidden';
-import ShowHidden from './ShowHidden';
+import ResetHidden from '../forms/ResetHidden';
+import ShowHidden from '../forms/ShowHidden';
 
 export default function Login({ setCurrentUser }) {
 

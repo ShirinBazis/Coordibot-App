@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
-import ResetHidden from './ResetHidden';
-import ShowHidden from './ShowHidden';
-import Input from './Input';
+import ResetHidden from '../forms/ResetHidden';
+import ShowHidden from '../forms/ShowHidden';
+import Input from '../tags/Input';
 import axios from 'axios';
-import { ProfileImageModal } from '../userView/Modals'
+import { ProfileImageModal } from '../forms/Modals'
 
 
 export default function Register() {

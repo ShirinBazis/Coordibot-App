@@ -47,6 +47,7 @@
   translate: 0 25%;
   border: .25em solid transparent;
   border-top-color: #777;
+  cursor: pointer;
 }
 
 .options {

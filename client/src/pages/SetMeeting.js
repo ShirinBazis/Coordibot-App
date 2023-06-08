@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Input from '../form/Input';
-import Select from '../form/Select';
+import Input from '../tags/Input';
+import Select from '../tags/Select';
 import axios from 'axios';
-import { SettingsModal } from './Modals';
+import { SettingsModal } from '../forms/Modals';
 
 const lecturers = [
   { name: "Talya Eden", room: 303 },
