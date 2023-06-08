@@ -25,3 +25,4 @@ yarn-error.log*
 node_modules
 src/temp.js
 public/test.html
+package-lock.json
