@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '@mobiscroll/react/dist/css/mobiscroll.min.css';
 import Input from '../form/Input';
 import Select from '../form/Select';
 import axios from 'axios';
