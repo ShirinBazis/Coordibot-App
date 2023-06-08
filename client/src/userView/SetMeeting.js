@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '@mobiscroll/react/dist/css/mobiscroll.min.css';
 import Input from '../form/Input';
 import Select from '../form/Select';
 import axios from 'axios';
@@ -61,7 +60,7 @@ export default function SetMeeting({ currentUser }) {
   const [optionalRooms, setRoom] = useState('');
 
   const isBusy = ""
-  const isBusyMessage = isBusy==""? "The robot is free right now!" : "The robot is busy right now"
+  const isBusyMessage = isBusy===""? "The robot is free right now!" : "The robot is busy right now"
 
   const save = async () => {
     var MeetingTitle = document.getElementById('Meeting Title').value;
@@ -72,7 +71,7 @@ export default function SetMeeting({ currentUser }) {
     var LocationRoom = optionalRooms.room;
 
     // if there is no values in invited and location, don't send request
-    if(Invited.length === 0 || Location=='') {
+    if(Invited.length === 0 || Location==='') {
       return;
     }
 

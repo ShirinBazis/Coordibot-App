@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import styles from "../select.module.css"
+import styles from "../css/select.module.css"
 
 export const SelectOption = {
     name: "",
