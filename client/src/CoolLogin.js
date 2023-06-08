@@ -16,13 +16,13 @@ function CoolLogin() {
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
-            if (count.current == true) {
+            if (count.current === true) {
                 username.current = input;
             } else if (count.current == false) {
                 password.current = input;
             }
-            arr.push({ text: input, type: count.current == true ? "Username" : "Password" })
-            if (count.current == false) {
+            arr.push({ text: input, type: count.current === true ? "Username" : "Password" })
+            if (count.current === false) {
                 authenticate().then(() => {
                     setInput("")
                 })
@@ -43,7 +43,7 @@ function CoolLogin() {
             }, 800);
         }).catch((err) => {
             let type = "server_error";
-            if (err.response?.status == 401) {
+            if (err.response?.status === 401) {
                 type = "error";
             }
             setArr((a) => [...a, { text: "", type: type }]);
@@ -66,7 +66,7 @@ function CoolLogin() {
             <div className="terminal_body">
                 {displayArr}
                 <input style={{ opacity: '0', position: 'absolute', width: '100%' }} value={input} autoFocus onKeyDown={handleKeyDown} onChange={(e) => setInput(e.target.value)}></input>
-                <Line flag={1} type={count.current == true ? "Username" : "Password"} text={input}></Line>
+                <Line flag={1} type={count.current === true ? "Username" : "Password"} text={input}></Line>
             </div>
         </div>
     );
