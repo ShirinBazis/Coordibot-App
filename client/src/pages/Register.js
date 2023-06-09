@@ -74,12 +74,17 @@ export default function Register() {
                     level: 0,
                 }
             }).catch(res => {
+                console.log(res)
                 //check if the server isn't connected
-                let type = "server_error";
-                if (res.response?.status === 401) {
-                    type = "error";
+                if (res.response?.status === 409) {
+                    setError('existedUsername');
                 }
-                setError(type);
+                else if (res == "Error: Network Error" || res.response?.status === 401) {
+                    setError('network');
+                }
+                else {
+                    setError('error');
+                }
                 return 2;
             });
         if (res == 2) { return 0; }

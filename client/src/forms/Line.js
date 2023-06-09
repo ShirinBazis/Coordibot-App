@@ -4,7 +4,7 @@ function Line({ text, flag, type }) {
     let out_text = "Login successful"
     let color = "green"
     if (type == "error") {
-        out_text = "Username or Password are wrong"
+        out_text = "Wrong password or username"
         color = "red"
     }
     if (type == "server_error") {

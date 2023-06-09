@@ -26,18 +26,18 @@ export default function Login() {
                         username: userName,
                         password: userPassword
                     }
-                    }).then((res) => {
-                        //setArray((a) => [...a, { text: res.data, type: "success" }]);
-                        setTimeout(() => {
-                            navigate("/meetings");
-                        }, 800);                   
+                }).then((res) => {
+                    setTimeout(() => {
+                        navigate("/meetings");
+                    }, 800);
                 }).catch(res => {
                     //check if the server isn't connected
-                    let type = "server_error";
-                    if (res.response?.status === 401) {
-                        type = "error";
+                    if (res == "Error: Network Error" || res.response?.status === 401) {
+                        setError('network');
                     }
-                    setError(type);
+                    else {
+                        setError('wrong');
+                    }
                 });
             document.getElementById("myForm").reset();
         }
