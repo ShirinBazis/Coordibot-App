@@ -11,7 +11,7 @@ app.use(cors());
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    console.log(username, password);
+    console.log(username, password, res.status);
     let result = await validateLogin(username, password);
     if (result) {
         res.status(200).send("Login successful");

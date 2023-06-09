@@ -55,7 +55,7 @@ const rooms = [
 ];
 
 
-export default function SetMeeting({ currentUser }) {
+export default function SetMeeting() {
   const [optionalLecturers, setLecturers] = useState([]);
   const [optionalRooms, setRoom] = useState('');
 

@@ -16,7 +16,7 @@ export default function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Login setCurrentUser={setCurrentUser} />}></Route>
+                <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />}></Route>
                 <Route path="/cool-login" element={<CoolLogin></CoolLogin>}></Route>
                 <Route path="/register" element={<Register />}></Route>
                 <Route path="/meetings" element={<SetMeeting currentUser={currentUser} />}></Route>
