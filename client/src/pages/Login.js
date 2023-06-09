@@ -26,23 +26,19 @@ export default function Login() {
                         username: userName,
                         password: userPassword
                     }
-                    // }).then((res) => {
-                    //     setArray((a) => [...a, { text: res.data, type: "success" }]);
-                    //     setTimeout(() => {
-                    //         navigate("/meetings");
-                    //     }, 800);                   
+                }).then((res) => {
+                    setTimeout(() => {
+                        navigate("/meetings");
+                    }, 800);
                 }).catch(res => {
                     //check if the server isn't connected
-                    let type = "server_error";
-                    if (res.response?.status === 401) {
-                        type = "error";
+                    if (res == "Error: Network Error" || res.response?.status === 401) {
+                        setError('network');
                     }
-                    setError(type);
+                    else {
+                        setError('wrong');
+                    }
                 });
-            if (res.response?.status && res.response?.status == 200) {
-                //set the user
-                navigate("/meetings");
-            }
             document.getElementById("myForm").reset();
         }
     }
@@ -54,11 +50,13 @@ export default function Login() {
             {(error === 'wrong') ? (<div className="alert alert-danger">Wrong password or username</div>) : ""}
             {(error === 'network') ? (<div className="alert alert-danger">Can't reach server</div>) : ""}
 
-            <Input inputName="Username" inputType="text" text='Username' />
-            <Input inputName="Password" inputType="password" text='Password' />
+            <Input className="Username" inputName="Username" inputType="text" text='Username' />
+            <Input className="Password" inputName="Password" inputType="password" text='Password' />
             <div>
                 <input type="button" value="Login" className="btn" onClick={login}></input>
+                <span className='toregister'>
                 Not registered? <Link to="/register">Click here</Link> to register
+                </span>
                 <br></br>
                 <br></br>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
