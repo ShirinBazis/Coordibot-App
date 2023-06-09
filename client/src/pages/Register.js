@@ -120,7 +120,7 @@ export default function Register() {
                 </div>
                 <div className='register-submit'>
                     <input type="submit" value="Register" className="btn" onClick={register}></input>
-                    <div>
+                    <div className='toregister'>
                         Already registered? <Link to="/login">Click Here</Link> to login
                     </div>
                 </div>

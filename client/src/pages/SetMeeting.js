@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Input from '../tags/Input';
 import Select from '../tags/Select';
 import axios from 'axios';
-import { SettingsModal } from '../forms/Modals';
+import { useNavigate } from "react-router-dom";
+
 
 const lecturers = [
   { name: "Talya Eden", room: 303 },
@@ -55,12 +56,22 @@ const rooms = [
 ];
 
 
+
 export default function SetMeeting() {
+
   const [optionalLecturers, setLecturers] = useState([]);
   const [optionalRooms, setRoom] = useState('');
 
   const isBusy = ""
-  const isBusyMessage = isBusy===""? "The robot is free right now!" : "The robot is busy right now"
+  const isBusyMessage = isBusy === "" ? "The robot is free right now!" : "The robot is busy right now"
+
+  let navigate = useNavigate();
+  const logOut = () => {
+    localStorage.setItem('currentUser', JSON.stringify('default user'));
+    localStorage.setItem('currentContact', JSON.stringify(''));
+    localStorage.setItem('userToken', JSON.stringify(''));
+    navigate("/login");
+  }
 
   const save = async () => {
     var MeetingTitle = document.getElementById('Meeting Title').value;
@@ -71,7 +82,7 @@ export default function SetMeeting() {
     var LocationRoom = optionalRooms.room;
 
     // if there is no values in invited and location, don't send request
-    if(Invited.length === 0 || Location==='') {
+    if (Invited.length === 0 || Location === '') {
       return;
     }
 
@@ -93,35 +104,39 @@ export default function SetMeeting() {
 
   return (
     <div>
-    <form id="myForm" className='cube meetings-form'>
-      <h1>Set a meeting</h1>
-      <hr></hr>
-      <div className='meetings'>
-        <Input inputName="Meeting Title" inputType="text" text='Meeting Title' />
-        <Input inputName="Description" inputType="text" text='Description' />
-        <Input inputName="Creator" inputType="text" text='Creator' />
-        <Select multiple options={lecturers} value={optionalLecturers} onChange={o => setLecturers(o)} label="Invited" />
-        <Select options={rooms} value={optionalRooms} onChange={o => setRoom(o)} label="Location" />
+      <form id="myForm" className='cube meetings-form'>
+        <h1>Set a meeting</h1>
+        <hr></hr>
+        <div className='meetings'>
+          <Input inputName="Meeting Title" inputType="text" text='Meeting Title' />
+          <Input inputName="Description" inputType="text" text='Description' />
+          <Input inputName="Creator" inputType="text" text='Creator' />
+          <Select multiple options={lecturers} value={optionalLecturers} onChange={o => setLecturers(o)} label="Invited" />
+          <Select options={rooms} value={optionalRooms} onChange={o => setRoom(o)} label="Location" />
 
-        <div className="row mb-3">
-          <label className="col-sm-4 col-form-label">Free/Busy:</label>
-          <div className="col-sm-6">
-            <div className="form-check form-switch">
-              {/* without the word checked = busy */}
-              <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked={isBusy} disabled />
-              <label className="form-check-label" htmlFor="flexSwitchCheckCheckedDisabled">{isBusyMessage}</label>
+          <div className="row mb-3">
+            <label className="col-sm-4 col-form-label">Free/Busy:</label>
+            <div className="col-sm-6">
+              <div className="form-check form-switch">
+                {/* without the word checked = busy */}
+                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked={isBusy} disabled />
+                <label className="form-check-label" htmlFor="flexSwitchCheckCheckedDisabled">{isBusyMessage}</label>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div>
+        <div>
 
-      <input type="button" value="Save" className="btn" onClick={save}></input>
-      </div>
-    </form>
+          <input type="button" value="Save" className="btn" onClick={save}></input>
+        </div>
+      </form>
 
-    <img src='settings.png' style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target="#settings-modal"/>
-    <SettingsModal />
+      <br></br>
+      <button class="logout" onClick={logOut}>
+        <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+        <div class="text">Logout</div>
+      </button>
+
 
     </div>
   )

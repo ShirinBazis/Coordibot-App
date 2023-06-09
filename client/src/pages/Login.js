@@ -50,11 +50,13 @@ export default function Login() {
             {(error === 'wrong') ? (<div className="alert alert-danger">Wrong password or username</div>) : ""}
             {(error === 'network') ? (<div className="alert alert-danger">Can't reach server</div>) : ""}
 
-            <Input inputName="Username" inputType="text" text='Username' />
-            <Input inputName="Password" inputType="password" text='Password' />
+            <Input className="Username" inputName="Username" inputType="text" text='Username' />
+            <Input className="Password" inputName="Password" inputType="password" text='Password' />
             <div>
                 <input type="button" value="Login" className="btn" onClick={login}></input>
+                <span className='toregister'>
                 Not registered? <Link to="/register">Click here</Link> to register
+                </span>
                 <br></br>
                 <br></br>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
