@@ -26,11 +26,11 @@ export default function Login() {
                         username: userName,
                         password: userPassword
                     }
-                    // }).then((res) => {
-                    //     setArray((a) => [...a, { text: res.data, type: "success" }]);
-                    //     setTimeout(() => {
-                    //         navigate("/meetings");
-                    //     }, 800);                   
+                    }).then((res) => {
+                        //setArray((a) => [...a, { text: res.data, type: "success" }]);
+                        setTimeout(() => {
+                            navigate("/meetings");
+                        }, 800);                   
                 }).catch(res => {
                     //check if the server isn't connected
                     let type = "server_error";
@@ -39,10 +39,6 @@ export default function Login() {
                     }
                     setError(type);
                 });
-            if (res.response?.status && res.response?.status == 200) {
-                //set the user
-                navigate("/meetings");
-            }
             document.getElementById("myForm").reset();
         }
     }
