@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Input from '../form/Input';
-import Select from '../form/Select';
+import Input from '../tags/Input';
+import Select from '../tags/Select';
 import axios from 'axios';
-import { SettingsModal } from './Modals';
+import { SettingsModal } from '../forms/Modals';
 
 const lecturers = [
   { name: "Talya Eden", room: 303 },
@@ -55,12 +55,12 @@ const rooms = [
 ];
 
 
-export default function SetMeeting({ currentUser }) {
+export default function SetMeeting() {
   const [optionalLecturers, setLecturers] = useState([]);
   const [optionalRooms, setRoom] = useState('');
 
   const isBusy = ""
-  const isBusyMessage = isBusy==""? "The robot is free right now!" : "The robot is busy right now"
+  const isBusyMessage = isBusy===""? "The robot is free right now!" : "The robot is busy right now"
 
   const save = async () => {
     var MeetingTitle = document.getElementById('Meeting Title').value;
@@ -71,7 +71,7 @@ export default function SetMeeting({ currentUser }) {
     var LocationRoom = optionalRooms.room;
 
     // if there is no values in invited and location, don't send request
-    if(Invited.length === 0 || Location=='') {
+    if(Invited.length === 0 || Location==='') {
       return;
     }
 

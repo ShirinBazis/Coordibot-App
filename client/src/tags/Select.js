@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import styles from "../select.module.css"
+import styles from "../css/select.module.css"
 
 export const SelectOption = {
     name: "",
@@ -80,6 +80,7 @@ export default function Select({ multiple, value, onChange, options, label }) {
                     setIsOpen(false)
                     break
                 default:
+                    break
             }
         }
         const cleanup = () => {
@@ -109,8 +110,9 @@ export default function Select({ multiple, value, onChange, options, label }) {
                                 <button
                                     key={v.room}
                                     onClick={e => {
-                                        // e.stopPropagation()
-                                        e.preventDefault();
+                                        e.stopPropagation()
+                                        e.preventDefault()
+                                        setIsOpen(prev => !prev)
                                         selectOption(v)
                                     }}
                                     className={styles["option-badge"]}
@@ -125,13 +127,13 @@ export default function Select({ multiple, value, onChange, options, label }) {
                         ?
                         <button
                             onClick={e => {
-                                // e.stopPropagation()
+                                e.stopPropagation()
                                 e.preventDefault();
-                                clearOptions()
+                                clearOptions();
+                                setIsOpen(false)
                             }}
                             className={styles["clear-btn"]}
-                        >
-                            &times;
+                        >&times;
                         </button> : <div className={styles.container}></div>
                     }
                     <div className={styles.divider}></div>
@@ -149,7 +151,7 @@ export default function Select({ multiple, value, onChange, options, label }) {
                                 className={`${styles.option} ${isOptionSelected(option) ? styles.selected : ""
                                     } ${index === highlightedIndex ? styles.highlighted : ""}`}
                             >
-                               {multiple ? option.name : option.room}
+                                {multiple ? option.name : option.room}
                             </li>
                         ))}
                     </ul>

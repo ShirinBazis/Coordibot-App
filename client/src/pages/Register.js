@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
-import ResetHidden from './ResetHidden';
-import ShowHidden from './ShowHidden';
-import Input from './Input';
+import ResetHidden from '../forms/ResetHidden';
+import ShowHidden from '../forms/ShowHidden';
+import Input from '../tags/Input';
 import axios from 'axios';
-import { ProfileImageModal } from '../userView/Modals'
+import { ProfileImageModal } from '../forms/Modals'
 
 
 export default function Register() {
@@ -16,7 +16,7 @@ export default function Register() {
         if (ShowHidden()) {
             newRegister().then(res => {
                 if (res == 1) {
-                    navigate("/");
+                    navigate("/login");
                 }
             });
         }
@@ -59,7 +59,31 @@ export default function Register() {
             setError('lettersN');
             return 0;
         }
-       
+        const res = await axios(
+            {
+                method: 'post',
+                url: 'http://localhost:4000/register',
+                headers: {
+                    'content-Type': 'application/json',
+                },
+                data:
+                {
+                    username: registerUser,
+                    displayname: registerNickname,
+                    password: registerPassword,
+                    level: 0,
+                }
+            }).catch(res => {
+                //check if the server isn't connected
+                let type = "server_error";
+                if (res.response?.status === 401) {
+                    type = "error";
+                }
+                setError(type);
+                return 2;
+            });
+        if (res == 2) { return 0; }
+        console.log("success")
         return 1;
     }
 
@@ -92,7 +116,7 @@ export default function Register() {
                 <div className='register-submit'>
                     <input type="submit" value="Register" className="btn" onClick={register}></input>
                     <div>
-                        Already registered? <Link to="/">Click Here</Link> to login
+                        Already registered? <Link to="/login">Click Here</Link> to login
                     </div>
                 </div>
             </form>

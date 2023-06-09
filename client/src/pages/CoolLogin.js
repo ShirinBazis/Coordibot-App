@@ -1,13 +1,13 @@
 import React from 'react'
 import { useState, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
-import Line from './Line';
+import Line from '../forms/Line';
 import axios from 'axios';
 
 
 function CoolLogin() {
     const [input, setInput] = useState("");
-    const [arr, setArr] = useState([]);
+    const [array, setArray] = useState([]);
     const count = useRef(true);
     const username = useRef("");
     const password = useRef("");
@@ -16,13 +16,13 @@ function CoolLogin() {
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
-            if (count.current == true) {
+            if (count.current === true) {
                 username.current = input;
             } else if (count.current == false) {
                 password.current = input;
             }
-            arr.push({ text: input, type: count.current == true ? "Username" : "Password" })
-            if (count.current == false) {
+            array.push({ text: input, type: count.current === true ? "Username" : "Password" })
+            if (count.current === false) {
                 authenticate().then(() => {
                     setInput("")
                 })
@@ -34,22 +34,22 @@ function CoolLogin() {
 
     const authenticate = async () => {
         await axios.post('http://localhost:4000/login', {
-            username: arr[arr.length - 2].text,
-            password: arr[arr.length - 1].text
+            username: array[array.length - 2].text,
+            password: array[array.length - 1].text
         }).then((res) => {
-            setArr((a) => [...a, { text: res.data, type: "success" }]);
+            setArray((a) => [...a, { text: res.data, type: "success" }]);
             setTimeout(() => {
                 navigate("/meetings");
             }, 800);
         }).catch((err) => {
             let type = "server_error";
-            if (err.response?.status == 401) {
+            if (err.response?.status === 401) {
                 type = "error";
             }
-            setArr((a) => [...a, { text: "", type: type }]);
+            setArray((a) => [...a, { text: "", type: type }]);
         })
     }
-    const displayArr = arr.map((obj, key) => {
+    const displayArr = array.map((obj, key) => {
         return <Line key={key} type={obj.type} text={obj.text}></Line>
     })
     return (
@@ -66,7 +66,7 @@ function CoolLogin() {
             <div className="terminal_body">
                 {displayArr}
                 <input style={{ opacity: '0', position: 'absolute', width: '100%' }} value={input} autoFocus onKeyDown={handleKeyDown} onChange={(e) => setInput(e.target.value)}></input>
-                <Line flag={1} type={count.current == true ? "Username" : "Password"} text={input}></Line>
+                <Line flag={1} type={count.current === true ? "Username" : "Password"} text={input}></Line>
             </div>
         </div>
     );

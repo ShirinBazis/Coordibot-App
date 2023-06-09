@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
-import Register from "./form/Register";
-import Login from "./form/Login";
-import SetMeeting from "./userView/SetMeeting"
-import CoolLogin from "./CoolLogin";
-import './App.css';
-import './CoolLogin.css'
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import SetMeeting from "./pages/SetMeeting"
+import CoolLogin from "./pages/CoolLogin";
+import './css/App.css';
+import './css/CoolLogin.css'
 
 export default function App() {
     const [currentUser, setCurrentUser] = useState("default user");
@@ -16,7 +16,7 @@ export default function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Login setCurrentUser={setCurrentUser} />}></Route>
+                <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />}></Route>
                 <Route path="/cool-login" element={<CoolLogin></CoolLogin>}></Route>
                 <Route path="/register" element={<Register />}></Route>
                 <Route path="/meetings" element={<SetMeeting currentUser={currentUser} />}></Route>
