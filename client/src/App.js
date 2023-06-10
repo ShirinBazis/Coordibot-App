@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -16,8 +16,9 @@ export default function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/login" element={<Login/>}></Route>
-                <Route path="/cool-login" element={<CoolLogin/>}></Route>
+                <Route path="/" element={<Navigate to="/login" />}></Route>
+                <Route path="/login" element={<Login />}></Route>
+                <Route path="/cool-login" element={<CoolLogin />}></Route>
                 <Route path="/register" element={<Register />}></Route>
                 <Route path="/meetings" element={<SetMeeting />}></Route>
             </Routes>
