@@ -1,17 +1,17 @@
 import express from 'express';
+import axios from 'axios';
 import cors from 'cors';
 import { validateLogin, usernameExists, addUser, getAllUsers } from './db.js';
+import { MAKE_MEETING_URL, ARRANGE_MEETING_URL, ROBOT_STATUS_URL } from './consts.js';
 
 
 const app = express();
 app.use(express.json());
-//app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    console.log(username, password, res.status);
     let result = await validateLogin(username, password);
     if (result) {
         res.status(200).send("Login successful");
@@ -22,11 +22,11 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
-    const { username,displayname, password, level } = req.body;
+    const { username, displayname, password, level } = req.body;
     if (!username || !password)
         return res.status(400).send("No username or password provided");
     else {
-        let result = await addUser(username,displayname, password, level);
+        let result = await addUser(username, displayname, password, level);
         if (result == 1) {
             res.status(201).send("User created successfully");
         }
@@ -36,7 +36,35 @@ app.post('/register', async (req, res) => {
         else {
             res.status(500).send("Internal server error");
         }
-    }    
+    }
+});
+
+app.post('/arrangeMeeting', async (req, res) => {
+    const { requester_id, title, description, invited, location } = req.body;
+    try {
+        const response = await axios.post(ARRANGE_MEETING_URL, { "requester_id": requester_id, "title": title, "invited": invited }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        res.status(200).json(response.data);
+    } catch (error) {
+        res.status(error.response?.status ?? 500).json({ msg: error.response?.data?.data?.msg ?? 'Internal Server Error' });
+    }
+});
+
+app.post('/makeMeeting', async (req, res) => {
+    const { requester_id } = req.body;
+    try {
+        const response = await axios.post(MAKE_MEETING_URL, { "requester_id": requester_id }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        res.status(200).json(response.data);
+    } catch (error) {
+        res.status(error.response?.status ?? 500).json({ msg: error.response?.data?.data?.msg ?? 'Internal Server Error' });
+    }
 });
 
 app.get('/users', async (req, res) => {
@@ -47,4 +75,16 @@ app.get('/users', async (req, res) => {
     }
     res.status(200).send(users);
 });
+
+app.get('/status', async (req, res) => {
+    try {
+        const response = await axios.get(ROBOT_STATUS_URL);
+        const status = response.data;
+        res.status(200).json(status);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 app.listen(4000);
