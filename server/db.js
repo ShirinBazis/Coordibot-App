@@ -37,10 +37,10 @@ export async function validateLogin(username, password) {
     try {
         await connectToServer();
         const user = await User.findOne({ username: username });
-        if(user) {
+        if (user) {
             const isPasswordCorrect = await bcrypt.compare(password, user.password);
             return isPasswordCorrect;
-        } 
+        }
         return false;
     } catch (err) {
         console.error(err);
@@ -51,7 +51,7 @@ export async function validateLogin(username, password) {
 }
 
 
-export async function addUser(username,displayname, password, level) {
+export async function addUser(username, displayname, password, level) {
     if (!level)
         level = 0;
     if (!displayname)
@@ -89,7 +89,7 @@ export async function usernameExists(username) {
     }
 }
 
-    
+
 
 export async function updateUserLevel(username, newLevel) {
     try {

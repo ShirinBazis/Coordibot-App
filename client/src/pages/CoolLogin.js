@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import Line from '../forms/Line';
 import axios from 'axios';
+import { LOGIN_URL } from './consts';
 
 
 function CoolLogin() {
@@ -33,7 +34,7 @@ function CoolLogin() {
     };
 
     const authenticate = async () => {
-        await axios.post('http://localhost:4000/login', {
+        await axios.post(LOGIN_URL, {
             username: array[array.length - 2].text,
             password: array[array.length - 1].text
         }).then((res) => {

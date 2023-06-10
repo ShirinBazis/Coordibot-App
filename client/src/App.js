@@ -8,7 +8,7 @@ import './css/App.css';
 import './css/CoolLogin.css'
 
 export default function App() {
-    const [currentUser, setCurrentUser] = useState("default user");
+    const [currentUser, setCurrentUser] = useState('');
     useEffect(() => {
         setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
     }, [currentUser])
@@ -17,7 +17,7 @@ export default function App() {
         <Router>
             <Routes>
                 <Route path="/login" element={<Login/>}></Route>
-                <Route path="/cool-login" element={<CoolLogin></CoolLogin>}></Route>
+                <Route path="/cool-login" element={<CoolLogin/>}></Route>
                 <Route path="/register" element={<Register />}></Route>
                 <Route path="/meetings" element={<SetMeeting />}></Route>
             </Routes>
