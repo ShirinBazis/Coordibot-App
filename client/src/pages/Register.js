@@ -15,7 +15,7 @@ export default function Register() {
         ResetHidden();
         if (ShowHidden()) {
             newRegister().then(res => {
-                if (res == 1) {
+                if (res === 1) {
                     navigate("/login");
                 }
             });
@@ -35,7 +35,7 @@ export default function Register() {
             setError('passwordLength');
             return 0;
         }
-        if (registerPassword != registerPasswordVerification) {
+        if (registerPassword !== registerPasswordVerification) {
             setError('differentPasswords');
             return 0;
         }
@@ -71,8 +71,7 @@ export default function Register() {
                     username: registerUser,
                     displayname: registerNickname,
                     password: registerPassword,
-                    level: 0,
-                    isadmin: 0
+                    level: 0
                 }
             }).catch(res => {
                 console.log(res)
@@ -80,15 +79,15 @@ export default function Register() {
                 if (res.response?.status === 409) {
                     setError('existedUsername');
                 }
-                else if (res == "Error: Network Error" || res.response?.status === 401) {
-                    setError('network');
+                else if (res.response?.status === 401) {
+                    setError('error');
                 }
                 else {
-                    setError('error');
+                    setError('network');
                 }
                 return 2;
             });
-        if (res == 2) { return 0; }
+        if (res === 2) { return 0; }
         console.log("success")
         return 1;
     }

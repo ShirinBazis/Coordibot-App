@@ -80,8 +80,8 @@ export default function SetMeeting() {
         });
         const user = response.data;
         console.log(user)
-        setIsAdmin(user.isadmin === 1);
-        console.log(isadmin);
+        setIsAdmin(user.level === 2);
+        console.log(user.level);
       } catch (error) {
         console.error('Error retrieving user admin status:', error);
       }
@@ -197,7 +197,10 @@ export default function SetMeeting() {
           </div>
         </div>
         <div className='btns'>
-          <button className='sendButton' onClick={handleSetMeeting} disabled={isBusy}>
+          <button className='sendButton' onClick={e => {
+                                    e.preventDefault()
+                                    handleSetMeeting()
+                                  }} disabled={isBusy}>
             <div class="svg-wrapper-1">
               <div class="svg-wrapper">
                 <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
