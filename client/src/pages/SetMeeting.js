@@ -75,13 +75,13 @@ export default function SetMeeting() {
   React.useEffect(() => {
     const fetchUserAdminStatus = async () => {
       try {
+        console.log(currentUser)
         const response = await axios.get("http://localhost:4000/user", {
           username: currentUser,
         });
         const user = response.data;
-        console.log(user)
-        setIsAdmin(user.level === 2);
-        console.log(user.level);
+        console.log(user.level)
+        setIsAdmin(isadmin === 2);
       } catch (error) {
         console.error('Error retrieving user admin status:', error);
       }
@@ -159,7 +159,7 @@ export default function SetMeeting() {
       setDidUserSetMeeting(true);
       alert("Estimated Time: " + response?.data?.data?.estimatedTime.toFixed(2) + " minutes")
     } catch (error) {
-      console.error(error.response?.data);
+      console.error(error?.response?.data);
     }
   }
 
@@ -168,9 +168,9 @@ export default function SetMeeting() {
       const response = await axios.post(MAKE_MEETING_URL, {
         "requester_id": 303,
       });
-      alert(response.data.data.msg)
+      alert(response?.data.data.msg)
     } catch (error) {
-      console.error(error.response?.data);
+      console.error(error?.response?.data);
     }
   }
 
