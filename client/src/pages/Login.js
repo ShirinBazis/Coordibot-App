@@ -24,10 +24,8 @@ export default function Login() {
             }).catch(res => {
                 //check if the server isn't connected
                 document.getElementById("myForm").reset();
-                if (res === "Error: Network Error" || res.response?.status === 401) {
-                    setError('network');
-                }
-                else {
+                setError('network');
+                if (res.response?.status === 401) {
                     setError('wrong');
                 }
             });
