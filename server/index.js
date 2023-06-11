@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
-import { validateLogin, usernameExists, addUser, getAllUsers } from './db.js';
+import { validateLogin, usernameExists, addUser, getAllUsers, getLevel } from './db.js';
 import { MAKE_MEETING_URL, ARRANGE_MEETING_URL, ROBOT_STATUS_URL } from './consts.js';
 
 
