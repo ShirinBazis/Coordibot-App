@@ -22,11 +22,11 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
-    const { username, displayname, password, level } = req.body;
+    const { username, displayname, password, level, isadmin } = req.body;
     if (!username || !password)
         return res.status(400).send("No username or password provided");
     else {
-        let result = await addUser(username, displayname, password, level);
+        let result = await addUser(username, displayname, password, level, isadmin);
         if (result == 1) {
             res.status(201).send("User created successfully");
         }
@@ -74,6 +74,22 @@ app.get('/users', async (req, res) => {
         res.status(500).send("Internal server error");
     }
     res.status(200).send(users);
+});
+
+app.get('/user', async (req, res) => {
+    // return a user
+    const { username } = req.body;
+    const user = await getUser(username);
+    if (!user) {
+        res.status(500).send("Internal server error");
+    }
+    res.status(200).send(user);
+});
+
+app.post('/update-user-level', async (req, res) => {
+    // return a user
+    const { username, newLevel } = req.body;
+    await updateUserLevel(username, newLevel);
 });
 
 app.get('/status', async (req, res) => {

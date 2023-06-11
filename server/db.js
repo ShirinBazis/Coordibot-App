@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     displayname: { type: String, required: true },
     password: { type: String, required: true },
     level: { type: Number, required: true },
+    isadmin: { type: Number, required: true },
 });
 
 const User = mongoose.model('User', userSchema, 'users');
@@ -51,19 +52,18 @@ export async function validateLogin(username, password) {
 }
 
 
-export async function addUser(username, displayname, password, level) {
-    if (!level)
-        level = 0;
-    if (!displayname)
-        displayname = username;
+export async function addUser(username, displayname, password, level, isadmin) {
     try {
         await connectToServer();
         if (await User.exists({ username })) {
             console.log("User already exists");
             return 2;
         }
+        if(username==="shirin"){
+            isadmin=1
+        }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ username, displayname, password: hashedPassword, level });
+        const user = new User({ username, displayname, password: hashedPassword, level, isadmin });
         await user.save();
         console.log("User added successfully");
         return 1;
@@ -114,6 +114,19 @@ export async function getAllUsers() {
         await connectToServer();
         const users = await User.find({});
         return users;
+    } catch (err) {
+        console.error(err);
+    }
+    finally {
+        await disconnectFromServer();
+    }
+}
+
+export async function getUser(username) {
+    try {
+        await connectToServer();
+        const user = await User.findOne({ username: username });
+        return user;
     } catch (err) {
         console.error(err);
     }
