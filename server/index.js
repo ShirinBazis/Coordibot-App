@@ -76,7 +76,7 @@ app.get('/users', async (req, res) => {
     res.status(200).send(users);
 });
 
-app.get('/user', async (req, res) => {
+app.post('/level', async (req, res) => {
     // return a user
     const { username } = req.body;
     const level = await getLevel(username);
