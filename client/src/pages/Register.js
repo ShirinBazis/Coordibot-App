@@ -72,6 +72,7 @@ export default function Register() {
                     displayname: registerNickname,
                     password: registerPassword,
                     level: 0,
+                    isadmin: 0
                 }
             }).catch(res => {
                 console.log(res)
