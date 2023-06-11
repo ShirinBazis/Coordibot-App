@@ -157,9 +157,9 @@ export default function SetMeeting() {
         "location": LocationRoom
       });
       setDidUserSetMeeting(true);
-      alert("Estimated Time: " + response.data.data.estimatedTime.toFixed(2) + " minutes")
+      alert("Estimated Time: " + response?.data?.data?.estimatedTime.toFixed(2) + " minutes")
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error.response?.data);
     }
   }
 
@@ -170,7 +170,7 @@ export default function SetMeeting() {
       });
       alert(response.data.data.msg)
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error.response?.data);
     }
   }
 
