@@ -49,7 +49,7 @@ app.post('/arrangeMeeting', async (req, res) => {
         });
         res.status(200).json(response.data);
     } catch (error) {
-        res.status(error.response?.status ?? 500).json({ msg: error.response?.data?.data?.msg ?? 'Internal Server Error' });
+        res.status(error?.response?.status ?? 500).json({ msg: error?.response?.data?.data?.msg ?? 'Internal Server Error' });
     }
 });
 
@@ -79,11 +79,11 @@ app.get('/users', async (req, res) => {
 app.get('/user', async (req, res) => {
     // return a user
     const { username } = req.body;
-    const level = await getUser(username);
+    const level = await getLevel(username);
     // if (!level) {
     //     res.status(500).send("Internal server error");
     // }
-    res.status(200).send(user);
+    res.status(200).send(level);
 });
 
 app.post('/update-user-level', async (req, res) => {
