@@ -473,3 +473,11 @@ label {
   justify-content: space-between;
 }
 
+.modal-content {
+  background-color: var(--firstColor);
+}
+
+.btn-primary {
+  color: black
+}
+

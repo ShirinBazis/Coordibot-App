@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
-import { validateLogin, usernameExists, addUser, getAllUsers, getLevel } from './db.js';
+import { validateLogin, usernameExists, addUser, getAllUsers, getLevel, updateUserLevel } from './db.js';
 import { MAKE_MEETING_URL, ARRANGE_MEETING_URL, ROBOT_STATUS_URL } from './consts.js';
 
 
@@ -69,26 +69,35 @@ app.post('/makeMeeting', async (req, res) => {
 
 app.get('/users', async (req, res) => {
     // return all users
+    try {
     const users = await getAllUsers();
     if (!users) {
         res.status(500).send("Internal server error");
     }
     res.status(200).send(users);
+} catch (error) {
+    console.log(error)
+}
 });
 
 app.post('/level', async (req, res) => {
-    // return a user
+    // return a level
+    try {
     const { username } = req.body;
     const level = await getLevel(username);
-    // if (!level) {
-    //     res.status(500).send("Internal server error");
-    // }
-    res.status(200).send(level);
+    if (level === undefined) {
+        res.status(500).send("Internal server error");
+    }
+    res.status(200).json(level);
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 app.post('/update-user-level', async (req, res) => {
     // return a user
     const { username, newLevel } = req.body;
+    console.log("new level:", newLevel)
     await updateUserLevel(username, newLevel);
 });
 
