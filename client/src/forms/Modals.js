@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'
 import axios from 'axios';
 import Select from '../tags/Select';
+import styles from "../css/select.module.css"
+
 
 
 const levels = [
@@ -12,8 +14,9 @@ const levels = [
 export function AdminModal() {
     const modalRef = useRef(null);
     const [users, setUsers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState(null);
-    const [selectedLevel, setSelectedLevel] = useState('');
+    const [selectedUser, setSelectedUser] = useState("");
+    const [currentLevel, setCurrentLevel] = useState("");
+    const [selectedLevel, setSelectedLevel] = useState("");
 
     useEffect(() => {
         getUsers();
@@ -31,7 +34,9 @@ export function AdminModal() {
 
     const handleUserChange = (user) => {
         setSelectedUser(user);
+        setCurrentLevel(user.level)
     };
+
 
     const handleLevelChange = (level) => {
         setSelectedLevel(level);
@@ -64,32 +69,32 @@ export function AdminModal() {
                             options={users.length > 0 ? users.map((user) => ({ name: user.username, val: user.username, level: user.level })) : []}
                             value={selectedUser} onChange={handleUserChange} label="Choose a user:" />
 
-                        {selectedUser && (
-                            <div>
-                                <div className="row mb-3">
-                                    <label className="col-sm-4 col-form-label">Current Level:</label>
-                                    <div className="col-sm-6">
-                                       <span
-                                            id="current-level"
-                                            className="form-control"
-                                        >{selectedUser.level}
-                                        </span>
-                                    </div>
-                                </div>
-                                <Select options={levels} value={selectedLevel} onChange={handleLevelChange} label="Choose a level:" /> 
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-primary" id="save" onClick={saveUserLevel} data-bs-dismiss="modal" aria-label="Close">
-                                        Save
-                                    </button>
+                        <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label">Current Level:</label>
+                            <div className="col-sm-6">
+                                <div className={styles.container}>
+                                    <span
+                                        id="current-level"
+                                        className={styles.value}>
+                                        {currentLevel}
+                                    </span>
                                 </div>
                             </div>
-                        )}
+                        </div>
+                        <Select options={levels} value={selectedLevel} onChange={handleLevelChange} label="Choose a level:" />
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-primary" id="save" onClick={saveUserLevel} data-bs-dismiss="modal" aria-label="Close">
+                                Save
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     );
 }
+
+
 
 
 export function ProfileImageModal({ sorce = "contactImage.webp" }) {

@@ -16,16 +16,16 @@ export default function Register() {
         ResetHidden();
         if (ShowHidden()) {
             const res = await newRegister();
-                if (res === 1) {
-                    navigate("/login");
-                } else {
-                    setTimeout(() => {
-                        setShowError(false);
-                      }, 5000);
-                }
-            };
-        }
-    
+            if (res === 1) {
+                navigate("/login");
+            } else {
+                setTimeout(() => {
+                    setShowError(false);
+                }, 5000);
+            }
+        };
+    }
+
 
     /*adds a new user to the list of all the users*/
     const newRegister = async () => {
@@ -99,9 +99,9 @@ export default function Register() {
                 }
                 return 2;
             });
-        if (res === 2) { 
-              return 0; 
-            }
+        if (res === 2) {
+            return 0;
+        }
         console.log("success")
         return 1;
     }
@@ -143,12 +143,11 @@ export default function Register() {
                     </>
                 )}
                 <div className='register'>
-                    <div>
-                        <Input inputName="Username" inputType="text" text='Username' />
-                        <Input inputName="Nickname" inputType="text" text='Nickname' />
-                        <Input inputName="Password" inputType="password" text='Password' />
-                        <Input inputName="Password Verification" inputType="password" text='Password Verification' />
-                    </div>
+                    <Input inputName="Username" inputType="text" text='Username' />
+                    <Input inputName="Nickname" inputType="text" text='Nickname' />
+                    <Input inputName="Password" inputType="password" text='Password' />
+                    <Input inputName="Password Verification" inputType="password" text='Password Verification' />
+
                     <div className='register-pic'>
                         <img id="profile" src="contactImage.webp" data-bs-toggle="modal" data-bs-target="#addPicture-modal"></img>
                     </div>

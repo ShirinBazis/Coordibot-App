@@ -54,7 +54,8 @@ export default function Login() {
 
     return (
         <form id="myForm" className='cube center-form'>
-            <h1>Welcome To Coordibot App</h1>
+            <h1>Welcome To</h1>
+            <h1>Coordibot App</h1>
             <hr></hr>
             {showError && (
                 <>
