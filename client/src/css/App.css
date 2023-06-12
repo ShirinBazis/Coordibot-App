@@ -473,3 +473,17 @@ label {
   justify-content: space-between;
 }
 
+.modal-content {
+  background-color: var(--firstColor);
+}
+
+.btn-primary {
+  color: black
+}
+
+.alert-danger {
+  color: var(--firstColor);
+  background-color: var(--secondColorFaded);
+  border-color: var(--firstColor);
+}
+

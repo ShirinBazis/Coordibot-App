@@ -1,8 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Select from '../tags/Select';
 
+
+const levels = [
+    { name: "0", val: 0 },
+    { name: "1", val: 1 },
+    { name: "2", val: 2 }
+]
 
 export function AdminModal() {
     const modalRef = useRef(null);
@@ -24,23 +29,21 @@ export function AdminModal() {
         }
     };
 
-    const handleUserChange = (event) => {
-        const userId = event.target.value;
-        console.log(userId)
-        const selectedUser = users.find((user) => user.username === userId);
-        console.log(selectedUser.username)
-        setSelectedUser(selectedUser);
+    const handleUserChange = (user) => {
+        setSelectedUser(user);
     };
 
-    const handleLevelChange = (event) => {
-        setSelectedLevel(event.target.value);
+    const handleLevelChange = (level) => {
+        setSelectedLevel(level);
+        console.log("set to", level.val)
     };
 
     const saveUserLevel = async () => {
         try {
+            console.log(selectedUser.name, selectedLevel.val)
             await axios.post('http://localhost:4000/update-user-level', {
-                username: selectedUser.username,
-                newLevel: selectedLevel,
+                username: selectedUser.name,
+                newLevel: selectedLevel.val,
             });
             console.log('User level updated successfully');
         } catch (error) {
@@ -57,37 +60,30 @@ export function AdminModal() {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <div className="form-group">
-                            <label htmlFor="user-select">Choose user:</label>
-                            <select id="user-select" className="form-control" value={selectedUser?.id} onChange={handleUserChange}>
-                                <option value="">Select a user</option>
-                                {users.map((user) => (
-                                    <option key={user.id} value={user.id}>
-                                        {user.username}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        {selectedUser && (
-                            <div className="form-group">
-                                <label htmlFor="level-select">Level:</label>
-                                <select
-                                    id="level-select"
-                                    className="form-control"
-                                    value={selectedLevel}
-                                    onChange={handleLevelChange}
-                                >
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                </select>
+                        <Select
+                            options={users.length > 0 ? users.map((user) => ({ name: user.username, val: user.username, level: user.level })) : []}
+                            value={selectedUser} onChange={handleUserChange} label="Choose a user:" />
 
+                        {selectedUser && (
+                            <div>
+                                <div className="row mb-3">
+                                    <label className="col-sm-4 col-form-label">Current Level:</label>
+                                    <div className="col-sm-6">
+                                       <span
+                                            id="current-level"
+                                            className="form-control"
+                                        >{selectedUser.level}
+                                        </span>
+                                    </div>
+                                </div>
+                                <Select options={levels} value={selectedLevel} onChange={handleLevelChange} label="Choose a level:" /> 
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-primary" id="save" onClick={saveUserLevel} data-bs-dismiss="modal" aria-label="Close">
+                                        Save
+                                    </button>
+                                </div>
                             </div>
                         )}
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-primary" onClick={saveUserLevel}>
-                            Save
-                        </button>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@ import styles from "../css/select.module.css"
 
 export const SelectOption = {
     name: "",
-    room: ""
+    val: ""
 }
 
 const MultipleSelectProps = {
@@ -28,6 +28,7 @@ export default function Select({ multiple, value, onChange, options, label }) {
     const [highlightedIndex, setHighlightedIndex] = useState(0)
     const containerRef = useRef(null);
 
+
     function clearOptions() {
         // multiple ? onChange([]) : onChange(undefined)
         onChange([])
@@ -36,7 +37,7 @@ export default function Select({ multiple, value, onChange, options, label }) {
     function selectOption(option) {
         if (multiple) {
             // this option has already been selected before
-            if (value.some((o) => o.room === option.room)) {
+            if (value.some((o) => o.val === option.val)) {
                 onChange(value.filter((o) => o !== option))
             } else {
                 onChange([...value, option])
@@ -105,24 +106,29 @@ export default function Select({ multiple, value, onChange, options, label }) {
                     className={styles.container}
                 >
                     <span className={styles.value}>
-                        {multiple
-                            ? value.map(v => (
-                                <button
-                                    key={v.room}
-                                    onClick={e => {
-                                        e.stopPropagation()
-                                        e.preventDefault()
-                                        setIsOpen(prev => !prev)
-                                        selectOption(v)
-                                    }}
-                                    className={styles["option-badge"]}
-                                >
-                                    {v.name}
-                                    <span className={styles["remove-btn"]}>&times;</span>
-                                </button>
-                            ))
-                            : value?.room}
+                        {multiple ? (
+                            <div className={styles.selectedOptions}>
+                                {value.map((v) => (
+                                    <button
+                                        key={v.val}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                            setIsOpen((prev) => !prev);
+                                            selectOption(v);
+                                        }}
+                                        className={styles["option-badge"]}
+                                    >
+                                        {v.name}
+                                        <span className={styles["remove-btn"]}>&times;</span>
+                                    </button>
+                                ))} 
+                            </div>
+                        ) : (
+                            value?.val
+                        )}
                     </span>
+
                     {multiple
                         ?
                         <button
@@ -147,11 +153,11 @@ export default function Select({ multiple, value, onChange, options, label }) {
                                     setIsOpen(false)
                                 }}
                                 onMouseEnter={() => setHighlightedIndex(index)}
-                                key={option.room}
+                                key={option.val}
                                 className={`${styles.option} ${isOptionSelected(option) ? styles.selected : ""
                                     } ${index === highlightedIndex ? styles.highlighted : ""}`}
                             >
-                                {multiple ? option.name : option.room}
+                                {multiple ? option.name : option.val}
                             </li>
                         ))}
                     </ul>

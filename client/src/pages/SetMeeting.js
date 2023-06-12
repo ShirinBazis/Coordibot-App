@@ -9,53 +9,53 @@ import { AdminModal } from '../forms/Modals';
 
 
 const lecturers = [
-  { name: "Talya Eden", room: 303 },
-  { name: "Liam Roditty", room: 304 },
-  { name: "Ester Ezra", room: 305 },
-  { name: "Ely Porat", room: 306 },
-  { name: "Arnold Filtser", room: 307 },
-  { name: "Tsvi Kopelowitz", room: 308 },
-  { name: "Amihood Amir", room: 310 },
-  { name: "Sarit Kraus", room: 315 },
-  { name: "David Sarne", room: 316 },
-  { name: "Yoni Zohar", room: 319 },
-  { name: "Noa Agmon", room: 320 },
-  { name: "Gal Kaminka", room: 321 },
-  { name: "Reuth Mirsky", room: 322 },
-  { name: "Alex Shleyfman", room: 323 },
-  { name: "Hana Weitman", room: 324 },
+  { name: "Talya Eden", val: 303 },
+  { name: "Liam Roditty", val: 304 },
+  { name: "Ester Ezra", val: 305 },
+  { name: "Ely Porat", val: 306 },
+  { name: "Arnold Filtser", val: 307 },
+  { name: "Tsvi Kopelowitz", val: 308 },
+  { name: "Amihood Amir", val: 310 },
+  { name: "Sarit Kraus", val: 315 },
+  { name: "David Sarne", val: 316 },
+  { name: "Yoni Zohar", val: 319 },
+  { name: "Noa Agmon", val: 320 },
+  { name: "Gal Kaminka", val: 321 },
+  { name: "Reuth Mirsky", val: 322 },
+  { name: "Alex Shleyfman", val: 323 },
+  { name: "Hana Weitman", val: 324 },
 ];
 
 const rooms = [
-  { name: "", room: 301 },
-  { name: "", room: 302 },
-  { name: "Talya Eden", room: 303 },
-  { name: "Liam Roditty", room: 304 },
-  { name: "Ester Ezra", room: 305 },
-  { name: "Ely Porat", room: 306 },
-  { name: "Arnold Filtser", room: 307 },
-  { name: "Tsvi Kopelowitz", room: 308 },
-  { name: "", room: 309 },
-  { name: "Amihood Amir", room: 310 },
-  { name: "", room: 311 },
-  { name: "", room: 312 },
-  { name: "", room: 313 },
-  { name: "", room: 314 },
-  { name: "Sarit Kraus", room: 315 },
-  { name: "David Sarne", room: 316 },
-  { name: "", room: 317 },
-  { name: "", room: 318 },
-  { name: "Yoni Zohar", room: 319 },
-  { name: "Noa Agmon", room: 320 },
-  { name: "Gal Kaminka", room: 321 },
-  { name: "Reuth Mirsky", room: 322 },
-  { name: "Alex Shleyfman", room: 323 },
-  { name: "Hana Weitman", room: 324 },
-  { name: "", room: 325 },
-  { name: "", room: 327 },
-  { name: "", room: 328 },
-  { name: "", room: 329 },
-  { name: "", room: 331 },
+  { name: "", val: 301 },
+  { name: "", val: 302 },
+  { name: "Talya Eden", val: 303 },
+  { name: "Liam Roditty", val: 304 },
+  { name: "Ester Ezra", val: 305 },
+  { name: "Ely Porat", val: 306 },
+  { name: "Arnold Filtser", val: 307 },
+  { name: "Tsvi Kopelowitz", val: 308 },
+  { name: "", val: 309 },
+  { name: "Amihood Amir", val: 310 },
+  { name: "", val: 311 },
+  { name: "", val: 312 },
+  { name: "", val: 313 },
+  { name: "", val: 314 },
+  { name: "Sarit Kraus", val: 315 },
+  { name: "David Sarne", val: 316 },
+  { name: "", val: 317 },
+  { name: "", val: 318 },
+  { name: "Yoni Zohar", val: 319 },
+  { name: "Noa Agmon", val: 320 },
+  { name: "Gal Kaminka", val: 321 },
+  { name: "Reuth Mirsky", val: 322 },
+  { name: "Alex Shleyfman", val: 323 },
+  { name: "Hana Weitman", val: 324 },
+  { name: "", val: 325 },
+  { name: "", val: 327 },
+  { name: "", val: 328 },
+  { name: "", val: 329 },
+  { name: "", val: 331 },
 ];
 
 
@@ -67,9 +67,7 @@ export default function SetMeeting() {
   const [isBusy, setIsBusy] = useState(false);
   const [optionalRooms, setRoom] = useState('');
   const isBusyMessage = isBusy ? "The robot is busy right now" : "The robot is free right now!"
-  const [isadmin, setIsAdmin] = useState(true);
-//falseee
-
+  const [isadmin, setIsAdmin] = useState(false);
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   React.useEffect(() => {
@@ -80,8 +78,8 @@ export default function SetMeeting() {
           username: currentUser,
         });
         const level = response.data;
-        console.log("level", level)
-        setIsAdmin(isadmin === 2);
+        console.log("level:", level)
+        setIsAdmin(level === 2);
       } catch (error) {
         console.error('Error retrieving user admin status:', error);
       }
@@ -128,8 +126,8 @@ export default function SetMeeting() {
     fetchData();
     const MeetingTitle = document.getElementById('Meeting Title').value;
     const Description = document.getElementById('Description').value;
-    const InvitedRooms = optionalLecturers.map(item => item.room);
-    const LocationRoom = optionalRooms.room;
+    const InvitedRooms = optionalLecturers.map(item => item.val);
+    const LocationRoom = optionalRooms.val;
     if (InvitedRooms.length === 0) {
       console.error("Missing invited");
       return;

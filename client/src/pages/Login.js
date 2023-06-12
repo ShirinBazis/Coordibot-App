@@ -9,6 +9,21 @@ import { LOGIN_URL } from './consts';
 export default function Login() {
     let navigate = useNavigate();
     const [error, setError] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [showError, setShowError] = useState(false);
+
+    const handleUsernameChange = (event) => {
+        setUsername(event.target.value);
+        setShowError(false); // Hide the error when username changes
+        setError('')
+    };
+
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
+        setShowError(false); // Hide the error when password changes
+        setError('')
+    };
 
     const login = async () => {
         ResetHidden();
@@ -22,12 +37,17 @@ export default function Login() {
                 localStorage.setItem("currentUser", JSON.stringify(userName));
                 navigate("/meetings");
             }).catch(res => {
+                setShowError(true);
                 //check if the server isn't connected
                 document.getElementById("myForm").reset();
                 setError('network');
                 if (res.response?.status === 401) {
                     setError('wrong');
                 }
+                // Clear the error state after 3 seconds
+                setTimeout(() => {
+                    setShowError(false);
+                }, 3000);
             });
         }
     }
@@ -36,13 +56,20 @@ export default function Login() {
         <form id="myForm" className='cube center-form'>
             <h1>Welcome To Coordibot App</h1>
             <hr></hr>
-            {(error === 'wrong') ? (<div className="alert alert-danger">Wrong password or username</div>) : ""}
-            {(error === 'network') ? (<div className="alert alert-danger">Can't reach server</div>) : ""}
-
-            <Input className="Username" inputName="Username" inputType="text" text='Username' />
-            <Input className="Password" inputName="Password" inputType="password" text='Password' />
+            {showError && (
+                <>
+                    {error === "wrong" ? (
+                        <div className="alert alert-danger">Wrong password or username</div>
+                    ) : null}
+                    {error === "network" ? (
+                        <div className="alert alert-danger">Can't reach server</div>
+                    ) : null}
+                </>
+            )}
+            <Input className="Username" inputName="Username" id="username" inputType="text" text='Username' value={username} onChange={handleUsernameChange} />
+            <Input className="Password" inputName="Password" id="password" inputType="password" text='Password' value={password} onChange={handlePasswordChange} />
             <div>
-                <input type="submit" value="Login" className="btn" onClick={(e)=>{e.preventDefault();login()}}></input>
+                <input type="submit" value="Login" className="btn" onClick={(e) => { e.preventDefault(); login() }}></input>
                 <span className='toregister'>
                     Not registered? <Link to="/register">Click here</Link> to register
                 </span>
@@ -52,7 +79,7 @@ export default function Login() {
                     <button className="cssbuttons-io-button" onClick={(e) => {
                         e.preventDefault();
                         navigate('/cool-login')
-                        }}> Login for geeks
+                    }}> Login for geeks
                         <div className="icon">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
                         </div>

@@ -58,7 +58,7 @@ export async function addUser(username, displayname, password, level) {
             console.log("User already exists");
             return 2;
         }
-        if(username==="shirin"){
+        if(username==="admin"){
             level=2
         }
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -94,7 +94,7 @@ export async function updateUserLevel(username, newLevel) {
     try {
         await connectToServer();
         const result = await User.updateOne({ username }, { level: newLevel });
-        if (result.nModified === 1) {
+        if (result.modifiedCount === 1) {
             console.log("User level updated successfully");
         } else {
             console.log("User not found or level was already at the desired value");
