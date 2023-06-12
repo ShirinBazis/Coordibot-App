@@ -4,7 +4,6 @@ import ResetHidden from '../forms/ResetHidden';
 import ShowHidden from '../forms/ShowHidden';
 import Input from '../tags/Input';
 import axios from 'axios';
-import { ProfileImageModal } from '../forms/Modals'
 
 
 export default function Register() {
@@ -33,7 +32,6 @@ export default function Register() {
         var registerNickname = document.getElementById("Nickname").value;
         var registerPassword = document.getElementById("Password").value;
         var registerPasswordVerification = document.getElementById("Password Verification").value;
-        var registerPicture = document.getElementById("profile").src;
 
         // show the errors in the invalid cases
         if (registerPassword.length < 4 || registerPassword.length > 20) {
@@ -147,10 +145,6 @@ export default function Register() {
                     <Input inputName="Nickname" inputType="text" text='Nickname' />
                     <Input inputName="Password" inputType="password" text='Password' />
                     <Input inputName="Password Verification" inputType="password" text='Password Verification' />
-
-                    <div className='register-pic'>
-                        <img id="profile" src="contactImage.webp" data-bs-toggle="modal" data-bs-target="#addPicture-modal"></img>
-                    </div>
                 </div>
                 <div className='register-submit'>
                     <input type="submit" value="Register" className="btn" onClick={register}></input>
@@ -159,7 +153,6 @@ export default function Register() {
                     </div>
                 </div>
             </form>
-            <ProfileImageModal />
         </>
     )
 }
