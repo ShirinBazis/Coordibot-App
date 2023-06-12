@@ -175,7 +175,8 @@ export default function SetMeeting() {
   return (
     <div>
       <form id="myForm" className='cube meetings-form'>
-        <h1>Set a meeting</h1>
+      <h1 className='hello'>Hello {currentUser} !</h1>
+        <h3>Please set a meeting</h3>
         <hr></hr>
         <div className='meetings'>
           <Input inputName="Meeting Title" inputType="text" text='Meeting Title' />
