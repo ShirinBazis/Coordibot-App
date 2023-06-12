@@ -38,7 +38,7 @@ export default function Select({ multiple, value, onChange, options, label }) {
         if (multiple) {
             // this option has already been selected before
             if (value.some((o) => o.val === option.val)) {
-                onChange(value.filter((o) => o !== option))
+                return
             } else {
                 onChange([...value, option])
             }
