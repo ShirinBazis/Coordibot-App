@@ -28,6 +28,7 @@ export default function Select({ multiple, value, onChange, options, label }) {
     const [highlightedIndex, setHighlightedIndex] = useState(0)
     const containerRef = useRef(null);
 
+
     function clearOptions() {
         // multiple ? onChange([]) : onChange(undefined)
         onChange([])
@@ -105,24 +106,29 @@ export default function Select({ multiple, value, onChange, options, label }) {
                     className={styles.container}
                 >
                     <span className={styles.value}>
-                        {multiple
-                            ? value.map(v => (
-                                <button
-                                    key={v.val}
-                                    onClick={e => {
-                                        e.stopPropagation()
-                                        e.preventDefault()
-                                        setIsOpen(prev => !prev)
-                                        selectOption(v)
-                                    }}
-                                    className={styles["option-badge"]}
-                                >
-                                    {v.name}
-                                    <span className={styles["remove-btn"]}>&times;</span>
-                                </button>
-                            ))
-                            : value?.val}
+                        {multiple ? (
+                            <div className={styles.selectedOptions}>
+                                {value.map((v) => (
+                                    <button
+                                        key={v.val}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                            setIsOpen((prev) => !prev);
+                                            selectOption(v);
+                                        }}
+                                        className={styles["option-badge"]}
+                                    >
+                                        {v.name}
+                                        <span className={styles["remove-btn"]}>&times;</span>
+                                    </button>
+                                ))} 
+                            </div>
+                        ) : (
+                            value?.val
+                        )}
                     </span>
+
                     {multiple
                         ?
                         <button

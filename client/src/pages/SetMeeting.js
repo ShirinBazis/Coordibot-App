@@ -109,13 +109,13 @@ export default function SetMeeting() {
     }
   }, [isLogged]);
 
-  // React.useEffect(() => {
-  //   fetchData();
-  //   const intervalId = setInterval(fetchData, 10000);
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, [fetchData, isLogged]);
+  React.useEffect(() => {
+    fetchData();
+    const intervalId = setInterval(fetchData, 10000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [fetchData, isLogged]);
 
   const logOut = () => {
     localStorage.setItem('currentUser', JSON.stringify(''));

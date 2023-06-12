@@ -112,3 +112,8 @@
   font-size: 1.25em;
   color: #777;
 }
+
+.selectedOptions {
+  max-height: 70px; /* Set the desired maximum height for the scrollable area */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
