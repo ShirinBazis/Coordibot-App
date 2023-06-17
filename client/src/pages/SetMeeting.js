@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Input from '../tags/Input';
 import Select from '../tags/Select';
 import axios from 'axios';
@@ -69,6 +69,7 @@ export default function SetMeeting() {
   const isBusyMessage = isBusy ? "The robot is busy right now" : "The robot is free right now!"
   const [isadmin, setIsAdmin] = useState(false);
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const intervalId = useRef(null);
 
   React.useEffect(() => {
     const fetchUserAdminStatus = async () => {
@@ -111,14 +112,17 @@ export default function SetMeeting() {
 
   React.useEffect(() => {
     fetchData();
-    const intervalId = setInterval(fetchData, 10000);
+    intervalId.current = setInterval(fetchData, 10000);
     return () => {
-      clearInterval(intervalId);
+      setIsLogged(false);
+      clearInterval(intervalId.current);
     };
   }, [fetchData, isLogged]);
 
   const logOut = () => {
+    setIsLogged(false);
     localStorage.setItem('currentUser', JSON.stringify(''));
+    clearInterval(intervalId.current);
     navigate("/login");
   }
 
