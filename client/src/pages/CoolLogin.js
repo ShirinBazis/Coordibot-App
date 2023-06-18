@@ -39,6 +39,7 @@ function CoolLogin() {
             password: array[array.length - 1].text
         }).then((res) => {
             setArray((a) => [...a, { text: res.data, type: "success" }]);
+            localStorage.setItem("currentUser", JSON.stringify(array[array.length - 2].text));
             setTimeout(() => {
                 navigate("/meetings");
             }, 800);
