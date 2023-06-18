@@ -161,7 +161,7 @@ export default function SetMeeting() {
     }
   }
 
-  const handleStartMeeting = async () => {
+  const handleStartMeeting = async (e) => {
     try {
       const response = await axios.post(MAKE_MEETING_URL, {
         "requester_id": 303,
@@ -210,7 +210,10 @@ export default function SetMeeting() {
             </div>
             <span>Send</span>
           </button>
-          <button className="startButton" onClick={handleStartMeeting} disabled={!didUserSetMeeting}>Start</button>
+          <button className="startButton" onClick={e => {
+                                    e.preventDefault()
+                                    handleStartMeeting()
+                                  }} disabled={!didUserSetMeeting}>Start</button>
         </div>
       </form>
       <br></br>
