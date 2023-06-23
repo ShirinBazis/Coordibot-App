@@ -1,0 +1,26 @@
+{
+  "name": "coordibot-app",
+  "version": "1.0.0",
+  "description": "In the project directory, you should:",
+  "main": "index.js",
+  "scripts": {
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "install": "npm run install:client && npm run install:server",
+    "start:client": "cd client && npm start",
+    "start:server": "cd server && npm start",
+    "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShirinBazis/Coordibot-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShirinBazis/Coordibot-App/issues"
+  },
+  "homepage": "https://github.com/ShirinBazis/Coordibot-App#readme"
+}
