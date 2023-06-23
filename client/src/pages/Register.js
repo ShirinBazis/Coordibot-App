@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from "react-router-dom";
+import React, {useState} from 'react'
+import {Link, useNavigate} from "react-router-dom";
 import ResetHidden from '../forms/ResetHidden';
 import ShowHidden from '../forms/ShowHidden';
 import Input from '../tags/Input';
@@ -76,26 +76,24 @@ export default function Register() {
                     'content-Type': 'application/json',
                 },
                 data:
-                {
-                    username: registerUser,
-                    displayname: registerNickname,
-                    password: registerPassword,
-                    level: 0
-                }
+                    {
+                        username: registerUser,
+                        displayname: registerNickname,
+                        password: registerPassword,
+                        level: 0
+                    }
             }).catch(res => {
-                setShowError(true)
-                //check if the server isn't connected
-                if (res.response?.status === 409) {
-                    setError('existedUsername');
-                }
-                else if (res.response?.status === 401) {
-                    setError('wrong');
-                }
-                else {
-                    setError('network');
-                }
-                return 2;
-            });
+            setShowError(true)
+            //check if the server isn't connected
+            if (res.response?.status === 409) {
+                setError('existedUsername');
+            } else if (res.response?.status === 401) {
+                setError('wrong');
+            } else {
+                setError('network');
+            }
+            return 2;
+        });
         if (res === 2) {
             return 0;
         }
@@ -110,7 +108,8 @@ export default function Register() {
                 {showError && (
                     <>
                         {error === "existedUsername" ? (
-                            <div className="alert alert-danger">This username is already in use, please choose other name</div>
+                            <div className="alert alert-danger">This username is already in use, please choose other
+                                name</div>
                         ) : null}
                         {error === "wrong" ? (
                             <div className="alert alert-danger">Can't register</div>
@@ -119,10 +118,12 @@ export default function Register() {
                             <div className="alert alert-danger">Can't reach server</div>
                         ) : null}
                         {error === "passwordLength" ? (
-                            <div className="alert alert-danger">This password is too short, please choose password includes at least 4 character and not more than 20</div>
+                            <div className="alert alert-danger">This password is too short, please choose password
+                                includes at least 4 character and not more than 20</div>
                         ) : null}
                         {error === "numbers" ? (
-                            <div className="alert alert-danger">The password and the varification password don't match</div>
+                            <div className="alert alert-danger">The password and the varification password don't
+                                match</div>
                         ) : null}
                         {error === "differentPasswords" ? (
                             <div className="alert alert-danger">The password should contain numbers too</div>
@@ -139,10 +140,10 @@ export default function Register() {
                     </>
                 )}
                 <div className='register'>
-                    <Input inputName="Username" inputType="text" text='Username' />
-                    <Input inputName="Nickname" inputType="text" text='Nickname' />
-                    <Input inputName="Password" inputType="password" text='Password' />
-                    <Input inputName="Password Verification" inputType="password" text='Password Verification' />
+                    <Input inputName="Username" inputType="text" text='Username'/>
+                    <Input inputName="Nickname" inputType="text" text='Nickname'/>
+                    <Input inputName="Password" inputType="password" text='Password'/>
+                    <Input inputName="Password Verification" inputType="password" text='Password Verification'/>
                 </div>
                 <div className='register-submit'>
                     <input type="submit" value="Register" className="btn" onClick={register}></input>

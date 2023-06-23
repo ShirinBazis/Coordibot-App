@@ -1,4 +1,3 @@
-
 export default function ShowHidden() {
     var flag = 1;
     var inputs = document.getElementsByTagName('input');

@@ -1,5 +1,4 @@
-
-export function GetError({ inputName }) {
+export function GetError({inputName}) {
     switch (inputName) {
         case 'Username':
             return 'Please enter a Username'
@@ -14,7 +13,7 @@ export function GetError({ inputName }) {
     }
 }
 
-export default function ValidityErrors({ inputName }) {
+export default function ValidityErrors({inputName}) {
     switch (inputName) {
         case 'Username':
             return 'This username is already in use, please choose other name'

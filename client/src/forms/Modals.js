@@ -1,14 +1,14 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import axios from 'axios';
 import Select from '../tags/Select';
 import styles from "../css/select.module.css"
-
+import {UPDATE_LEVEL_URL, USERS_URL} from "../pages/consts";
 
 
 const levels = [
-    { name: "0", val: 0 },
-    { name: "1", val: 1 },
-    { name: "2", val: 2 }
+    {name: "0", val: 0},
+    {name: "1", val: 1},
+    {name: "2", val: 2}
 ]
 
 export function AdminModal() {
@@ -24,7 +24,7 @@ export function AdminModal() {
 
     const getUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/users');
+            const response = await axios.get(USERS_URL);
             const usersData = response.data;
             setUsers(usersData);
         } catch (error) {
@@ -44,7 +44,7 @@ export function AdminModal() {
 
     const saveUserLevel = async () => {
         try {
-            await axios.post('http://localhost:4000/update-user-level', {
+            await axios.post(UPDATE_LEVEL_URL, {
                 username: selectedUser.name,
                 newLevel: selectedLevel.val,
             });
@@ -63,8 +63,12 @@ export function AdminModal() {
                     </div>
                     <div className="modal-body">
                         <Select
-                            options={users.length > 0 ? users.map((user) => ({ name: user.username, val: user.username, level: user.level })) : []}
-                            value={selectedUser} onChange={handleUserChange} label="Choose a user:" />
+                            options={users.length > 0 ? users.map((user) => ({
+                                name: user.username,
+                                val: user.username,
+                                level: user.level
+                            })) : []}
+                            value={selectedUser} onChange={handleUserChange} label="Choose a user:"/>
 
                         <div className="row mb-3">
                             <label className="col-sm-4 col-form-label">Current Level:</label>
@@ -78,9 +82,11 @@ export function AdminModal() {
                                 </div>
                             </div>
                         </div>
-                        <Select options={levels} value={selectedLevel} onChange={handleLevelChange} label="Choose a level:" />
+                        <Select options={levels} value={selectedLevel} onChange={handleLevelChange}
+                                label="Choose a level:"/>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-primary" id="save" onClick={saveUserLevel} data-bs-dismiss="modal" aria-label="Close">
+                            <button type="button" className="btn btn-primary" id="save" onClick={saveUserLevel}
+                                    data-bs-dismiss="modal" aria-label="Close">
                                 Save
                             </button>
                         </div>

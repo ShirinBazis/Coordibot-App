@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import {useEffect, useRef, useState} from "react"
 import styles from "../css/select.module.css"
 
 export const SelectOption = {
@@ -9,13 +9,15 @@ export const SelectOption = {
 const MultipleSelectProps = {
     multiple: true,
     value: [],
-    onChange: (value) => { }
+    onChange: (value) => {
+    }
 }
 
 const SingleSelectProps = {
     multiple: false,
     value: undefined,
-    onChange: (value) => { }
+    onChange: (value) => {
+    }
 }
 
 
@@ -23,7 +25,7 @@ const SelectProps = {
     options: []
 } & (SingleSelectProps | MultipleSelectProps)
 
-export default function Select({ multiple, value, onChange, options, label }) {
+export default function Select({multiple, value, onChange, options, label}) {
     const [isOpen, setIsOpen] = useState(false)
     const [highlightedIndex, setHighlightedIndex] = useState(0)
     const containerRef = useRef(null);
@@ -122,7 +124,7 @@ export default function Select({ multiple, value, onChange, options, label }) {
                                         {v.name}
                                         <span className={styles["remove-btn"]}>&times;</span>
                                     </button>
-                                ))} 
+                                ))}
                             </div>
                         ) : (
                             value?.val
@@ -155,7 +157,7 @@ export default function Select({ multiple, value, onChange, options, label }) {
                                 onMouseEnter={() => setHighlightedIndex(index)}
                                 key={option.val}
                                 className={`${styles.option} ${isOptionSelected(option) ? styles.selected : ""
-                                    } ${index === highlightedIndex ? styles.highlighted : ""}`}
+                                } ${index === highlightedIndex ? styles.highlighted : ""}`}
                             >
                                 {multiple ? option.name : option.val}
                             </li>
