@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/ShirinBazis/Coordibot-App/issues"
   },
-  "homepage": "https://github.com/ShirinBazis/Coordibot-App#readme"
+  "homepage": "https://github.com/ShirinBazis/Coordibot-App#readme",
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  }
 }
