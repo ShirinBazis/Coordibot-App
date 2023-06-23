@@ -3,7 +3,7 @@ import Input from '../tags/Input';
 import Select from '../tags/Select';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
-import {MAKE_MEETING_URL, ARRANGE_MEETING_URL, ROBOT_STATUS_URL} from './consts';
+import {MAKE_MEETING_URL, ARRANGE_MEETING_URL, ROBOT_STATUS_URL, LEVEL_URL} from './consts';
 import {AdminModal} from '../forms/Modals';
 
 
@@ -73,7 +73,7 @@ export default function SetMeeting() {
     React.useEffect(() => {
         const fetchUserAdminStatus = async () => {
             try {
-                const response = await axios.post("http://localhost:4000/level", {
+                const response = await axios.post(LEVEL_URL, {
                     username: currentUser,
                 });
                 const level = response.data;
