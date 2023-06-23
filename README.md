@@ -4,9 +4,9 @@
 
 In the project directory, you should:
 
-### `1. Run client`
+### `1. npm install`
 
-### `2. Run server`
+### `2. npm start`
 
 *The instructions for each one of them are in readme of those packages
 
