@@ -64,7 +64,7 @@ export default function SetMeeting() {
   const [isLogged, setIsLogged] = useState(false);
   const [didUserSetMeeting, setDidUserSetMeeting] = useState(false);
   const [optionalLecturers, setLecturers] = useState([]);
-  const [isBusy, setIsBusy] = useState(false);
+  const [isBusy, setIsBusy] = useState(true);
   const [optionalRooms, setRoom] = useState('');
   const isBusyMessage = isBusy ? "The robot is busy right now" : "The robot is free right now!"
   const [isadmin, setIsAdmin] = useState(false);
@@ -74,12 +74,10 @@ export default function SetMeeting() {
   React.useEffect(() => {
     const fetchUserAdminStatus = async () => {
       try {
-        console.log(currentUser)
         const response = await axios.post("http://localhost:4000/level", {
           username: currentUser,
         });
         const level = response.data;
-        console.log("level:", level)
         setIsAdmin(level === 2);
       } catch (error) {
         console.error('Error retrieving user admin status:', error);
@@ -152,7 +150,7 @@ export default function SetMeeting() {
     // send request to the robot
     try {
       const response = await axios.post(ARRANGE_MEETING_URL, {
-        "requester_id": 303,
+        "requester_id": currentUser,
         "title": MeetingTitle,
         "description": Description,
         "invited": InvitedRooms,
@@ -165,7 +163,7 @@ export default function SetMeeting() {
     }
   }
 
-  const handleStartMeeting = async (e) => {
+  const handleStartMeeting = async () => {
     try {
       const response = await axios.post(MAKE_MEETING_URL, {
         "requester_id": 303,
@@ -189,7 +187,7 @@ export default function SetMeeting() {
           <Select options={rooms} value={optionalRooms} onChange={o => setRoom(o)} label="Location" />
 
           <div className="row mb-3">
-            <label className="col-sm-4 col-form-label">Free/Busy:</label>
+            <label className="col-sm-4 col-form-label">Busy/Free:</label>
             <div className="col-sm-6">
               <div className="form-check form-switch">
                 {/* without the word checked = busy */}

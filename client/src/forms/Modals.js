@@ -40,17 +40,14 @@ export function AdminModal() {
 
     const handleLevelChange = (level) => {
         setSelectedLevel(level);
-        console.log("set to", level.val)
     };
 
     const saveUserLevel = async () => {
         try {
-            console.log(selectedUser.name, selectedLevel.val)
             await axios.post('http://localhost:4000/update-user-level', {
                 username: selectedUser.name,
                 newLevel: selectedLevel.val,
             });
-            console.log('User level updated successfully');
         } catch (error) {
             console.error('Error updating user level:', error);
         }

@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
-import { validateLogin, usernameExists, addUser, getAllUsers, getLevel, updateUserLevel } from './db.js';
+import { validateLogin, addUser, getAllUsers, getLevel, updateUserLevel } from './db.js';
 import { MAKE_MEETING_URL, ARRANGE_MEETING_URL, ROBOT_STATUS_URL } from './consts.js';
 
 
@@ -27,10 +27,10 @@ app.post('/register', async (req, res) => {
         return res.status(400).send("No username or password provided");
     else {
         let result = await addUser(username, displayname, password, level);
-        if (result == 1) {
+        if (result === 1) {
             res.status(201).send("User created successfully");
         }
-        else if (result == 2) {
+        else if (result === 2) {
             res.status(409).send("Username already exists");
         }
         else {
@@ -76,7 +76,7 @@ app.get('/users', async (req, res) => {
     }
     res.status(200).send(users);
 } catch (error) {
-    console.log(error)
+    console.error(error)
 }
 });
 
@@ -90,14 +90,12 @@ app.post('/level', async (req, res) => {
     }
     res.status(200).json(level);
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 });
 
 app.post('/update-user-level', async (req, res) => {
-    // return a user
     const { username, newLevel } = req.body;
-    console.log("new level:", newLevel)
     await updateUserLevel(username, newLevel);
 });
 

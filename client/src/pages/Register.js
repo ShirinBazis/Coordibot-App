@@ -22,7 +22,7 @@ export default function Register() {
                     setShowError(false);
                 }, 5000);
             }
-        };
+        }
     }
 
 
@@ -44,25 +44,25 @@ export default function Register() {
             setShowError(true)
             return 0;
         }
-        var regExpNumbers = /[0-9]/g;
+        let regExpNumbers = /[0-9]/g;
         if (!regExpNumbers.test(registerPassword)) {
             setError('numbers');
             setShowError(true)
             return 0;
         }
-        var regExpLetters = /[a-zA-Z]/g;
+        let regExpLetters = /[a-zA-Z]/g;
         if (!regExpLetters.test(registerPassword)) {
             setError('lettersP');
             setShowError(true)
             return 0;
         }
-        var regExpLetters = /[a-zA-Z]/g;
+        regExpLetters = /[a-zA-Z]/g;
         if (!regExpLetters.test(registerUser)) {
             setError('lettersU');
             setShowError(true)
             return 0;
         }
-        var regExpLetters = /[a-zA-Z]/g;
+        regExpLetters = /[a-zA-Z]/g;
         if (!regExpLetters.test(registerNickname)) {
             setError('lettersN');
             setShowError(true)
@@ -83,7 +83,6 @@ export default function Register() {
                     level: 0
                 }
             }).catch(res => {
-                console.log(res)
                 setShowError(true)
                 //check if the server isn't connected
                 if (res.response?.status === 409) {
@@ -100,7 +99,6 @@ export default function Register() {
         if (res === 2) {
             return 0;
         }
-        console.log("success")
         return 1;
     }
 
