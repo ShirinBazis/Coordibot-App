@@ -64,10 +64,10 @@ export default function SetMeeting() {
   const [isLogged, setIsLogged] = useState(false);
   const [didUserSetMeeting, setDidUserSetMeeting] = useState(false);
   const [optionalLecturers, setLecturers] = useState([]);
-  const [isBusy, setIsBusy] = useState(true);
+  const [isAvailable, setIsAvailable] = useState(false);
   const [optionalRooms, setRoom] = useState('');
-  const isBusyMessage = isBusy ? "The robot is busy right now" : "The robot is free right now!"
-  const [isadmin, setIsAdmin] = useState(false);
+  const isBusyMessage = isAvailable ? "The robot is free right now!" : "The robot is busy right now"
+  const [isAdmin, setIsAdmin] = useState(false);
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const intervalId = useRef(null);
 
@@ -101,7 +101,7 @@ export default function SetMeeting() {
     if (isLogged) {
       try {
         const res = await axios.get(ROBOT_STATUS_URL);
-        setIsBusy(res.data.data.status === 'busy');
+        setIsAvailable(res.data.data.status === 'available');
       } catch (err) {
         console.error(err);
       }
@@ -142,7 +142,7 @@ export default function SetMeeting() {
       console.error("Missing meeting title");
       return;
     }
-    if (isBusy) {
+    if (!isAvailable) {
       console.error("Robot is busy");
       return;
     }
@@ -166,7 +166,7 @@ export default function SetMeeting() {
   const handleStartMeeting = async () => {
     try {
       const response = await axios.post(MAKE_MEETING_URL, {
-        "requester_id": 303,
+        "requester_id": currentUser,
       });
       alert(response?.data.data.msg)
     } catch (error) {
@@ -191,7 +191,7 @@ export default function SetMeeting() {
             <div className="col-sm-6">
               <div className="form-check form-switch">
                 {/* without the word checked = busy */}
-                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked={isBusy ? "" : "busy"} disabled />
+                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked={isAvailable} disabled />
                 <label className="form-check-label" htmlFor="flexSwitchCheckCheckedDisabled">{isBusyMessage}</label>
               </div>
             </div>
@@ -199,9 +199,9 @@ export default function SetMeeting() {
         </div>
         <div className='btns'>
           <button className='sendButton' onClick={e => {
-                                    e.preventDefault()
-                                    handleSetMeeting()
-                                  }} disabled={isBusy}>
+                                    e.preventDefault();
+                                    handleSetMeeting();
+                                  }} disabled={!isAvailable}>
             <div className="svg-wrapper-1">
               <div className="svg-wrapper">
                 <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -213,8 +213,8 @@ export default function SetMeeting() {
             <span>Send</span>
           </button>
           <button className="startButton" onClick={e => {
-                                    e.preventDefault()
-                                    handleStartMeeting()
+                                    e.preventDefault();
+                                    handleStartMeeting();
                                   }} disabled={!didUserSetMeeting}>Start</button>
         </div>
       </form>
@@ -226,7 +226,7 @@ export default function SetMeeting() {
               <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
           <div className="text">Logout</div>
         </button>
-        {isadmin
+        {isAdmin
           ?
           <div>
             <button className="admin" data-bs-toggle="modal" data-bs-target="#admin-modal">
