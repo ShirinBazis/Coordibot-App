@@ -1,5 +1,4 @@
-
-export function GetError({ inputName }) {
+export function GetError({inputName}) {
     switch (inputName) {
         case 'Username':
             return 'Please enter a Username'

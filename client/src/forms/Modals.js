@@ -1,16 +1,18 @@
-import React, { useRef, useState, useEffect, createElement } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import axios from 'axios';
 import Select from '../tags/Select';
 import styles from "../css/select.module.css"
 import ResetHidden from '../forms/ResetHidden';
 import ShowHidden from '../forms/ShowHidden';
 import { Modal } from 'bootstrap';
+import React, {useRef, useState, useEffect} from 'react'
+import {UPDATE_LEVEL_URL, USERS_URL} from "../pages/consts";
 
 
 const levels = [
-    { name: "0", val: 0 },
-    { name: "1", val: 1 },
-    { name: "2", val: 2 }
+    {name: "0", val: 0},
+    {name: "1", val: 1},
+    {name: "2", val: 2}
 ]
 
 export function AdminModal() {
@@ -29,7 +31,7 @@ export function AdminModal() {
 
     const getUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/users');
+            const response = await axios.get(USERS_URL);
             const usersData = response.data;
             setUsers(usersData);
         } catch (error) {
@@ -45,7 +47,6 @@ export function AdminModal() {
 
     const handleLevelChange = (level) => {
         setSelectedLevel(level);
-        console.log("set to", level.val)
     };
 
     const saveUserLevel = () => {

@@ -7,17 +7,17 @@ const dbName = 'CoordiBot'
 const url = `mongodb+srv://${username}:${password}@cluster0.csiw8un.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 const userSchema = new mongoose.Schema({
-    username: { type: String, required: true, unique: true },
-    displayname: { type: String, required: true },
-    password: { type: String, required: true },
-    level: { type: Number, required: true },
+    username: {type: String, required: true, unique: true},
+    displayname: {type: String, required: true},
+    password: {type: String, required: true},
+    level: {type: Number, required: true},
 });
 
 const User = mongoose.model('User', userSchema, 'users');
 
 async function connectToServer() {
     try {
-        await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
         console.log("Connected to MongoDB");
     } catch (err) {
         console.error(err);
@@ -36,16 +36,14 @@ async function disconnectFromServer() {
 export async function validateLogin(username, password) {
     try {
         await connectToServer();
-        const user = await User.findOne({ username: username });
+        const user = await User.findOne({username: username});
         if (user) {
-            const isPasswordCorrect = await bcrypt.compare(password, user.password);
-            return isPasswordCorrect;
+            return await bcrypt.compare(password, user.password);
         }
         return false;
     } catch (err) {
         console.error(err);
-    }
-    finally {
+    } finally {
         await disconnectFromServer();
     }
 }
@@ -54,23 +52,22 @@ export async function validateLogin(username, password) {
 export async function addUser(username, displayname, password, level) {
     try {
         await connectToServer();
-        if (await User.exists({ username })) {
+        if (await User.exists({username})) {
             console.log("User already exists");
             return 2;
         }
-        if(username==="admin"){
-            level=2
+        if (username === "admin") {
+            level = 2
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ username, displayname, password: hashedPassword, level });
+        const user = new User({username, displayname, password: hashedPassword, level});
         await user.save();
         console.log("User added successfully");
         return 1;
     } catch (err) {
         console.error(err);
         return 0;
-    }
-    finally {
+    } finally {
         await disconnectFromServer();
     }
 }
@@ -78,22 +75,20 @@ export async function addUser(username, displayname, password, level) {
 export async function usernameExists(username) {
     try {
         await connectToServer();
-        const user = await User.findOne({ username });
+        const user = await User.findOne({username});
         return user ? true : false;
     } catch (err) {
         console.error(err);
-    }
-    finally {
+    } finally {
         await disconnectFromServer();
     }
 }
 
 
-
 export async function updateUserLevel(username, newLevel) {
     try {
         await connectToServer();
-        const result = await User.updateOne({ username }, { level: newLevel });
+        const result = await User.updateOne({username}, {level: newLevel});
         if (result.modifiedCount === 1) {
             console.log("User level updated successfully");
         } else {
@@ -101,8 +96,7 @@ export async function updateUserLevel(username, newLevel) {
         }
     } catch (err) {
         console.error(err);
-    }
-    finally {
+    } finally {
         await disconnectFromServer();
     }
 }
@@ -115,8 +109,7 @@ export async function getAllUsers() {
         return users;
     } catch (err) {
         console.error(err);
-    }
-    finally {
+    } finally {
         await disconnectFromServer();
     }
 }
@@ -124,13 +117,12 @@ export async function getAllUsers() {
 export async function getLevel(username) {
     try {
         await connectToServer();
-        const user = await User.findOne({ username });
+        const user = await User.findOne({username});
         console.log("user:", user)
         return user.level;
     } catch (err) {
         console.error(err);
-    }
-    finally {
+    } finally {
         await disconnectFromServer();
     }
 }

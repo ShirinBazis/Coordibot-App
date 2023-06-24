@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 
-function Line({ text, flag, type }) {
+function Line({text, flag, type}) {
     let out_text = "Login successful"
     let color = "green"
     if (type == "error") {

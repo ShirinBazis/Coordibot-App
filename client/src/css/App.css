@@ -1,505 +1,505 @@
 :root {
-  --firstColor: hsl(199, 60%, 81%);
-  --firstColorFaded: #b2daecCC;
-  --secondColor: #5255ee;
-  --secondColorFaded: #5255eeCC;
-  --niceWhite: #F9FBFF;
+    --firstColor: hsl(199, 60%, 81%);
+    --firstColorFaded: #b2daecCC;
+    --secondColor: #5255ee;
+    --secondColorFaded: #5255eeCC;
+    --niceWhite: #F9FBFF;
 }
 
 * {
-  font-family: Helvetica, sans-serif;
-  box-sizing: border-box;
-  letter-spacing: 0.05em;
+    font-family: Helvetica, sans-serif;
+    box-sizing: border-box;
+    letter-spacing: 0.05em;
 }
 
 h1 {
-  font-weight: bold;
-  color: var(--firstColor);
-  text-align: center;
-  font-size: 2.2em;
+    font-weight: bold;
+    color: var(--firstColor);
+    text-align: center;
+    font-size: 2.2em;
 }
 
 .hello {
-  font-weight: bold;
-  color: var(--secondColor);
-  text-align: center;
-  font-size: 2.2em;
+    font-weight: bold;
+    color: var(--secondColor);
+    text-align: center;
+    font-size: 2.2em;
 }
 
 h3 {
-  font-weight: bold;
-  color: var(--firstColor);
-  text-align: center;
+    font-weight: bold;
+    color: var(--firstColor);
+    text-align: center;
 }
 
 body {
-  background: url("https://previews.123rf.com/images/abidal/abidal1304/abidal130400086/19113457-computer-robot-background.jpg")
-  /* linear-gradient(to left, var(--secondColor), var(--firstColor)); */
+    background: url("https://previews.123rf.com/images/abidal/abidal1304/abidal130400086/19113457-computer-robot-background.jpg")
+    /* linear-gradient(to left, var(--secondColor), var(--firstColor)); */
 }
 
 .cube {
-  background-color: rgba(44, 43, 43, 0.8);
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    background-color: rgba(44, 43, 43, 0.8);
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
     0 0 0 2px rgb(255, 255, 255),
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-  padding: 40px 45px 35px 20px;
-  margin-top: 100px;
-  width: 800px;
-  border-radius: 5rem;
-  text-align: center;  
+    padding: 40px 45px 35px 20px;
+    margin-top: 100px;
+    width: 800px;
+    border-radius: 5rem;
+    text-align: center;
 }
 
 .btn {
-  background-color: var(--firstColor);
-  cursor: pointer;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  border-radius: 0.25rem;
-  transition: background-color 0.4s ease-in-out, box-shadow .15s ease-in-out;
-  margin-right: 1.9rem;
+    background-color: var(--firstColor);
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.4s ease-in-out, box-shadow .15s ease-in-out;
+    margin-right: 1.9rem;
 }
 
 .btn:hover {
-  background-color: var(--secondColor);
+    background-color: var(--secondColor);
 }
 
 Link,
 img {
-  width: 40px;
-  height: 40px;
+    width: 40px;
+    height: 40px;
 }
 
 .borderW {
-  background-color: var(--niceWhite);
-  padding: 1rem;
+    background-color: var(--niceWhite);
+    padding: 1rem;
 }
 
 .center-form {
-  margin: auto;
-  /* margin-top: 13%; */
-  width: 50%;
-  padding: 30px;
+    margin: auto;
+    /* margin-top: 13%; */
+    width: 50%;
+    padding: 30px;
 }
 
 .meetings-form {
   margin: auto;
-  margin-top: 27%;
+  /* margin-top: 13%; */
   width: 100%;
-  padding: 15px;
+  padding: 30px;
 }
 
 .register .meetings {
-  display: grid;
-  grid-template-columns: 80% 20%;
-  align-items: center;
-  justify-content: center;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    align-items: center;
+    justify-content: center;
 }
 
 .register-submit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .register img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  cursor: pointer;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .hidden {
-  color: var(--firstColor);
-  display: none;
+    color: var(--firstColor);
+    display: none;
 }
 
 #root {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
-  padding: 0;
-  width: 100%;
-  height: 75%;
-  min-height: 600px;
-  min-width: 900px;
-  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 99% 1%;
-  box-sizing: border-box;
-  align-items: center;
+    padding: 0;
+    width: 100%;
+    height: 75%;
+    min-height: 600px;
+    min-width: 900px;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 99% 1%;
+    box-sizing: border-box;
+    align-items: center;
 }
 
 
 #bottom-bar {
-  width: 100%;
-  background: var(--niceWhite);
-  border-radius: 0 0 10px 10px;
-  border-style: solid;
-  border-top: none;
-  border-color: var(--firstColor);
+    width: 100%;
+    background: var(--niceWhite);
+    border-radius: 0 0 10px 10px;
+    border-style: solid;
+    border-top: none;
+    border-color: var(--firstColor);
 }
 
 #chat-grid {
-  display: none;
-  grid-template-columns: 10% 80% 10%;
-  justify-items: center;
-  align-items: center;
-  height: 100%;
+    display: none;
+    grid-template-columns: 10% 80% 10%;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
 }
 
 .message-input {
-  width: 100%;
-  border: 0;
-  color: var(--firstColor);
-  background-color: var(--niceWhite);
+    width: 100%;
+    border: 0;
+    color: var(--firstColor);
+    background-color: var(--niceWhite);
 }
 
 .message-input::placeholder {
-  color: var(--firstColor);
+    color: var(--firstColor);
 }
 
 .message-input:focus {
-  outline: 0;
+    outline: 0;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
-  padding-left: 3px;
-  background: linear-gradient(to bottom left, var(--firstColor) 20%, var(--secondColor) 100%);
-  border-radius: 50%;
-  text-align: center;
-  padding-top: 8px;
-  color: var(--niceWhite);
+    width: 40px;
+    height: 40px;
+    padding-left: 3px;
+    background: linear-gradient(to bottom left, var(--firstColor) 20%, var(--secondColor) 100%);
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 8px;
+    color: var(--niceWhite);
 }
 
 .user-profile .avatar {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .user-profile img {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 
 .hidden1 {
-  display: none;
-  color: var(--firstColor);
+    display: none;
+    color: var(--firstColor);
 }
 
 #welcome {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  display: flex;
-  align-items: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
 }
 
-#welcome>span {
-  padding: 50px;
-  color: var(--firstColor);
-  font-size: 2.5rem;
-  font-weight: 600;
+#welcome > span {
+    padding: 50px;
+    color: var(--firstColor);
+    font-size: 2.5rem;
+    font-weight: 600;
 }
 
 
 .person {
-  position: relative;
-  width: 100%;
-  padding: 12px 5% 16px;
-  cursor: pointer;
-  background-color: var(--white);
-  overflow-y: hidden;
+    position: relative;
+    width: 100%;
+    padding: 12px 5% 16px;
+    cursor: pointer;
+    background-color: var(--niceWhite);
+    overflow-y: hidden;
 }
 
 .user-profile img,
 .person img {
-  float: left;
-  width: 40px;
-  height: 40px;
-  margin-right: 12px;
-  margin-top: 5px;
-  border-radius: 50%;
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    margin-top: 5px;
+    border-radius: 50%;
 }
 
 .person .avatar {
-  float: left;
-  width: 40px;
-  height: 40px;
-  margin-right: 12px;
-  margin-top: 5px;
-  padding-left: 3px;
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    margin-top: 5px;
+    padding-left: 3px;
 }
 
 .person .name {
-  font-size: 16px;
-  line-height: 25px;
-  color: rgb(54, 52, 52);
-  font-family: "Source Sans Pro", sans-serif;
-  font-weight: 600;
+    font-size: 16px;
+    line-height: 25px;
+    color: rgb(54, 52, 52);
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 600;
 }
 
 .person .time {
-  font-size: 12px;
-  position: absolute;
-  min-height: 75px;
-  top: 16px;
-  right: 10%;
-  padding: 0 0 5px 5px;
-  color: rgb(97, 96, 96);
+    font-size: 12px;
+    position: absolute;
+    min-height: 75px;
+    top: 16px;
+    right: 10%;
+    padding: 0 0 5px 5px;
+    color: rgb(97, 96, 96);
 }
 
 .person .preview {
-  font-size: 14px;
-  display: inline-block;
-  text-overflow: ellipsis;
-  color: rgb(97, 96, 96);
-  max-width: 70%;
-  max-height: 25px;
-  overflow-x: hidden;
-  overflow-y: hidden;
+    font-size: 14px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    color: rgb(97, 96, 96);
+    max-width: 70%;
+    max-height: 25px;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 Link,
 img {
-  width: 40px;
-  height: 40px;
+    width: 40px;
+    height: 40px;
 }
 
 .modal-body,
 label {
-
   margin-right: 20px;
 }
-
 
 
 /* userview page */
 
 .event-color-c {
-  display: flex;
-  margin: 16px;
-  align-items: center;
-  cursor: pointer;
+    display: flex;
+    margin: 16px;
+    align-items: center;
+    cursor: pointer;
 }
 
 .event-color-label {
-  flex: 1 0 auto;
+    flex: 1 0 auto;
 }
 
 .event-color {
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  margin-right: 10px;
-  margin-left: 240px;
-  background: #5ac8fa;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin-right: 10px;
+    margin-left: 240px;
+    background: #5ac8fa;
 }
 
 .crud-color-row {
-  display: flex;
-  justify-content: center;
-  margin: 5px;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
 }
 
 .crud-color-c {
-  padding: 3px;
-  margin: 2px;
+    padding: 3px;
+    margin: 2px;
 }
 
 .crud-color {
-  position: relative;
-  min-width: 46px;
-  min-height: 46px;
-  margin: 2px;
-  cursor: pointer;
-  border-radius: 23px;
-  background: #5ac8fa;
+    position: relative;
+    min-width: 46px;
+    min-height: 46px;
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 23px;
+    background: #5ac8fa;
 }
 
 .crud-color-c.selected,
 .crud-color-c:hover {
-  box-shadow: inset 0 0 0 3px #007bff;
-  border-radius: 48px;
+    box-shadow: inset 0 0 0 3px #007bff;
+    border-radius: 48px;
 }
 
 .crud-color:before {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -10px;
-  margin-left: -10px;
-  color: #f7f7f7;
-  font-size: 20px;
-  text-shadow: 0 0 3px #000;
-  display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -10px;
+    margin-left: -10px;
+    color: #f7f7f7;
+    font-size: 20px;
+    text-shadow: 0 0 3px #000;
+    display: none;
 }
 
 .crud-color-c.selected .crud-color:before {
-  display: block;
+    display: block;
 }
 
 .toregister, .col-form-label, .form-check-label {
   color: white;
-  margin-right: 20px;
 }
 
 
 .logout, .admin {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition-duration: .3s;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
-  background-color: var(--secondColor);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: var(--secondColor);
 }
 
 /* plus sign */
 .sign {
-  width: 100%;
-  transition-duration: .3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .sign svg {
-  width: 17px;
+    width: 17px;
 }
 
 .sign svg path {
-  fill: white;
+    fill: white;
 }
+
 /* text */
 .text {
-  position: absolute;
-  right: 0%;
-  width: 0%;
-  opacity: 0;
-  color: white;
-  font-size: 0.9em;
-  font-weight: 600;
-  transition-duration: .3s;
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition-duration: .3s;
 }
+
 /* hover effect on button width */
 .logout:hover, .admin:hover {
-  width: 160px;
-  border-radius: 40px;
-  transition-duration: .3s;
+    width: 160px;
+    border-radius: 40px;
+    transition-duration: .3s;
 }
 
 .logout:hover .sign, .admin:hover .sign {
-  width: 30%;
-  transition-duration: .3s;
-  padding-left: 10px;
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 10px;
 }
+
 /* hover effect button's text */
 .logout:hover .text, .admin:hover .text {
-  opacity: 1;
-  width: 70%;
-  transition-duration: .3s;
-  padding-right: 10px;
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
 }
+
 /* button click effect*/
 .logout:active, .admin:active {
-  transform: translate(2px ,2px);
+    transform: translate(2px, 2px);
 }
 
 
 .startButton {
-  font-family: inherit;
-  font-size: 15px;
-  background: var(--secondColor);
-  color: white;
-  padding: 0.7em 1em;
-  padding-left: 0.9em;
-  border: none;
-  border-radius: 16px;
-  overflow: hidden;
-  margin-left: 8em;
+    font-family: inherit;
+    font-size: 15px;
+    background: var(--secondColor);
+    color: white;
+    padding: 0.7em 1em;
+    padding-left: 0.9em;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-left: 8em;
 
 }
 
 .sendButton {
-  font-family: inherit;
-  font-size: 15px;
-  background: var(--secondColor);
-  color: white;
-  padding: 0.7em 1em;
-  padding-left: 0.9em;
-  display: flex;
-  align-items: center;
-  border: none;
-  border-radius: 16px;
-  overflow: hidden;
-  transition: all 0.2s;
+    font-family: inherit;
+    font-size: 15px;
+    background: var(--secondColor);
+    color: white;
+    padding: 0.7em 1em;
+    padding-left: 0.9em;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.2s;
 }
 
 .sendButton span {
-  display: block;
-  margin-left: 0.3em;
-  transition: all 0.3s ease-in-out;
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
 }
 
 .sendButton svg {
-  display: block;
-  transform-origin: center center;
-  transition: transform 0.3s ease-in-out;
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
 }
 
 .sendButton:hover .svg-wrapper {
-  animation: fly-1 0.6s ease-in-out infinite alternate;
+    animation: fly-1 0.6s ease-in-out infinite alternate;
 }
 
 .sendButton:hover svg {
-  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+    transform: translateX(1.2em) rotate(45deg) scale(1.1);
 }
 
 .sendButton:hover span {
-  transform: translateX(5em);
+    transform: translateX(5em);
 }
 
 .sendButton:active {
-  transform: scale(0.95);
+    transform: scale(0.95);
 }
 
 .btns {
-  align-items: center;
-  display: flex;
-  margin-left: 30px;
+    align-items: center;
+    display: flex;
+    margin-left: 30px;
 }
 
 .extraBtns {
-  align-items: center;
-  display: flex;
-  margin-left: 10px;
-  justify-content: space-between;
+    align-items: center;
+    display: flex;
+    margin-left: 10px;
+    justify-content: space-between;
 }
 
 .modal-content {
   background-color: var(--firstColor);
-  width: 70%;
 }
 
 .btn-primary {
-  color: black
+    color: black
 }
 
 .alert-danger {
-  color: var(--firstColor);
-  background-color: var(--secondColorFaded);
-  border-color: var(--firstColor);
+    color: var(--firstColor);
+    background-color: var(--secondColorFaded);
+    border-color: var(--firstColor);
 }
 
 .required {

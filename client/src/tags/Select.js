@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import {useEffect, useRef, useState} from "react"
 import styles from "../css/select.module.css"
 import { GetError } from '../forms/ValidityErrors';
 
@@ -11,13 +11,15 @@ export const SelectOption = {
 const MultipleSelectProps = {
     multiple: true,
     value: [],
-    onChange: (value) => { }
+    onChange: (value) => {
+    }
 }
 
 const SingleSelectProps = {
     multiple: false,
     value: undefined,
-    onChange: (value) => { }
+    onChange: (value) => {
+    }
 }
 
 
@@ -130,7 +132,7 @@ export default function Select({ multiple, value, onChange, options, label, isRe
                                         {v.name}
                                         <span className={styles["remove-btn"]}>&times;</span>
                                     </button>
-                                ))} 
+                                ))}
                             </div>
                         ) : (
                             value?.val
@@ -163,7 +165,7 @@ export default function Select({ multiple, value, onChange, options, label, isRe
                                 onMouseEnter={() => setHighlightedIndex(index)}
                                 key={option.val}
                                 className={`${styles.option} ${isOptionSelected(option) ? styles.selected : ""
-                                    } ${index === highlightedIndex ? styles.highlighted : ""}`}
+                                } ${index === highlightedIndex ? styles.highlighted : ""}`}
                             >
                                 {multiple ? option.name : option.val}
                             </li>

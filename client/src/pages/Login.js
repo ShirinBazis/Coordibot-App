@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import React, {useState} from 'react';
+import {Link, useNavigate} from "react-router-dom";
 import Input from '../tags/Input';
 import axios from 'axios';
 import ResetHidden from '../forms/ResetHidden';
 import ShowHidden from '../forms/ShowHidden';
-import { LOGIN_URL } from './consts';
+import {LOGIN_URL} from './consts';
 
 export default function Login() {
     let navigate = useNavigate();
@@ -70,22 +70,31 @@ export default function Login() {
                     ) : null}
                 </>
             )}
-            <Input className="Username" inputName="Username" id="username" inputType="text" text='Username' value={username} onChange={handleUsernameChange} />
-            <Input className="Password" inputName="Password" id="password" inputType="password" text='Password' value={password} onChange={handlePasswordChange} />
+            <Input className="Username" inputName="Username" id="username" inputType="text" text='Username'
+                   value={username} onChange={handleUsernameChange}/>
+            <Input className="Password" inputName="Password" id="password" inputType="password" text='Password'
+                   value={password} onChange={handlePasswordChange}/>
             <div>
-                <input type="submit" value="Login" className="btn" onClick={(e) => { e.preventDefault(); login() }}></input>
+                <input type="submit" value="Login" className="btn" onClick={(e) => {
+                    e.preventDefault();
+                    login()
+                }}></input>
                 <span className='toregister'>
                     Not registered? <Link to="/register">Click here</Link> to register
                 </span>
                 <br></br>
                 <br></br>
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div style={{display: 'flex', justifyContent: 'center'}}>
                     <button className="cssbuttons-io-button" onClick={(e) => {
                         e.preventDefault();
                         navigate('/cool-login')
                     }}> Login for geeks
                         <div className="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path fill="currentColor"
+                                      d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
+                            </svg>
                         </div>
                     </button>
                 </div>

@@ -1,5 +1,3 @@
-
-
 export default function ShowHidden(invitedOrUser = "", locationOrLevel = "", isModal = false) {
     var flag = 1;
     var hiddenElements = document.getElementsByClassName('hidden');
