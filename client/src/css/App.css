@@ -83,9 +83,9 @@ img {
 
 .meetings-form {
   margin: auto;
-  /* margin-top: 13%; */
+  margin-top: 27%;
   width: 100%;
-  padding: 30px;
+  padding: 15px;
 }
 
 .register .meetings {
@@ -272,6 +272,7 @@ img {
 
 .modal-body,
 label {
+
   margin-right: 20px;
 }
 
@@ -344,6 +345,7 @@ label {
 
 .toregister, .col-form-label, .form-check-label {
   color: white;
+  margin-right: 20px;
 }
 
 
@@ -487,6 +489,7 @@ label {
 
 .modal-content {
   background-color: var(--firstColor);
+  width: 70%;
 }
 
 .btn-primary {
@@ -499,3 +502,7 @@ label {
   border-color: var(--firstColor);
 }
 
+.required {
+  color: red;
+  font-size: 12px;
+}

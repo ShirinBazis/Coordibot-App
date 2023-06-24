@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { MAKE_MEETING_URL, ARRANGE_MEETING_URL, ROBOT_STATUS_URL } from './consts';
 import { AdminModal } from '../forms/Modals';
+import ResetHidden from '../forms/ResetHidden';
+import ShowHidden from '../forms/ShowHidden';
 
 
 
@@ -72,14 +74,13 @@ export default function SetMeeting() {
   const intervalId = useRef(null);
 
   React.useEffect(() => {
+    ResetHidden();
     const fetchUserAdminStatus = async () => {
       try {
-        console.log(currentUser)
         const response = await axios.post("http://localhost:4000/level", {
           username: currentUser,
         });
         const level = response.data;
-        console.log("level:", level)
         setIsAdmin(level === 2);
       } catch (error) {
         console.error('Error retrieving user admin status:', error);
@@ -132,37 +133,26 @@ export default function SetMeeting() {
     const Description = document.getElementById('Description').value;
     const InvitedRooms = optionalLecturers.map(item => item.val);
     const LocationRoom = optionalRooms.val;
-    if (InvitedRooms.length === 0) {
-      console.error("Missing invited");
-      return;
-    }
-    if (LocationRoom == null) {
-      console.error("Missing location");
-      return;
-    }
-    if (MeetingTitle === '') {
-      console.error("Missing meeting title");
-      return;
-    }
-    if (isBusy) {
-      console.error("Robot is busy");
-      return;
-    }
+    if (ShowHidden(InvitedRooms, LocationRoom)) {
+      // send request to the robot
+      try {
+        const response = await axios.post(ARRANGE_MEETING_URL, {
+          "requester_id": 303,
+          "title": MeetingTitle,
+          "description": Description,
+          "invited": InvitedRooms,
+          "location": LocationRoom
+        });
+        setDidUserSetMeeting(true);
+        alert("Estimated Time: " + response?.data?.data?.estimatedTime.toFixed(2) + " minutes")
 
-    // send request to the robot
-    try {
-      const response = await axios.post(ARRANGE_MEETING_URL, {
-        "requester_id": 303,
-        "title": MeetingTitle,
-        "description": Description,
-        "invited": InvitedRooms,
-        "location": LocationRoom
-      });
-      setDidUserSetMeeting(true);
-      alert("Estimated Time: " + response?.data?.data?.estimatedTime.toFixed(2) + " minutes")
-    } catch (error) {
-      console.error(error?.response?.data);
+      } catch (error) {
+        console.error(error?.response?.data);
+      }
     }
+    setTimeout(() => {
+      ResetHidden();
+    }, 4000);
   }
 
   const handleStartMeeting = async (e) => {
@@ -179,14 +169,14 @@ export default function SetMeeting() {
   return (
     <div>
       <form id="myForm" className='cube meetings-form'>
-      <h1 className='hello'>Hello {currentUser} !</h1>
+        <h1 className='hello'>Hello {currentUser} !</h1>
         <h3>Please set a meeting</h3>
         <hr></hr>
         <div className='meetings'>
-          <Input inputName="Meeting Title" inputType="text" text='Meeting Title' />
-          <Input inputName="Description" inputType="text" text='Description' />
-          <Select multiple options={lecturers} value={optionalLecturers} onChange={o => setLecturers(o)} label="Invited" />
-          <Select options={rooms} value={optionalRooms} onChange={o => setRoom(o)} label="Location" />
+          <Input inputName="Meeting Title" inputType="text" text="Meeting Title" isRequired="yes" />
+          <Input inputName="Description" inputType="text" text='Description' isRequired="yes" />
+          <Select multiple options={lecturers} value={optionalLecturers} onChange={o => setLecturers(o)} label="Invited" isRequired="yes" />
+          <Select options={rooms} value={optionalRooms} onChange={o => setRoom(o)} label="Location" isRequired="yes" />
 
           <div className="row mb-3">
             <label className="col-sm-4 col-form-label">Free/Busy:</label>
@@ -201,9 +191,9 @@ export default function SetMeeting() {
         </div>
         <div className='btns'>
           <button className='sendButton' onClick={e => {
-                                    e.preventDefault()
-                                    handleSetMeeting()
-                                  }} disabled={isBusy}>
+            e.preventDefault()
+            handleSetMeeting()
+          }} disabled={isBusy}>
             <div className="svg-wrapper-1">
               <div className="svg-wrapper">
                 <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -215,9 +205,9 @@ export default function SetMeeting() {
             <span>Send</span>
           </button>
           <button className="startButton" onClick={e => {
-                                    e.preventDefault()
-                                    handleStartMeeting()
-                                  }} disabled={!didUserSetMeeting}>Start</button>
+            e.preventDefault()
+            handleStartMeeting()
+          }} disabled={!didUserSetMeeting}>Start</button>
         </div>
       </form>
       <br></br>

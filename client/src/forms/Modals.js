@@ -1,8 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, createElement } from 'react'
 import axios from 'axios';
 import Select from '../tags/Select';
 import styles from "../css/select.module.css"
-
+import ResetHidden from '../forms/ResetHidden';
+import ShowHidden from '../forms/ShowHidden';
+import { Modal } from 'bootstrap';
 
 
 const levels = [
@@ -17,8 +19,11 @@ export function AdminModal() {
     const [selectedUser, setSelectedUser] = useState("");
     const [currentLevel, setCurrentLevel] = useState("");
     const [selectedLevel, setSelectedLevel] = useState("");
+    const [isSaved, setSaved] = useState(false);
+
 
     useEffect(() => {
+        ResetHidden();
         getUsers();
     }, []);
 
@@ -43,18 +48,49 @@ export function AdminModal() {
         console.log("set to", level.val)
     };
 
-    const saveUserLevel = async () => {
-        try {
-            console.log(selectedUser.name, selectedLevel.val)
-            await axios.post('http://localhost:4000/update-user-level', {
-                username: selectedUser.name,
-                newLevel: selectedLevel.val,
-            });
-            console.log('User level updated successfully');
-        } catch (error) {
-            console.error('Error updating user level:', error);
+    const saveUserLevel = () => {
+        if (ShowHidden(selectedUser.name, selectedLevel.val, true)) {
+            try {
+                // const button = document.getElementById('save');
+                // button.dataset.bsDismiss = 'modal';
+                // button.classList.remove('show');
+                // button.style.display = 'none';
+
+                // const modal = document.getElementById('admin-modal');
+                // modal.dataset.bsDismiss = 'modal';
+                // modal.classList.remove('show');
+                // modal.style.display = 'none';
+                // modal.classList.add('hide')
+                // modal.setAttribute('aria-hidden', 'false');
+                // document.body.classList.remove('modal-open');
+
+                console.log(selectedUser.name, selectedLevel.val)
+                axios.post('http://localhost:4000/update-user-level', {
+                    username: selectedUser.name,
+                    newLevel: selectedLevel.val,
+                });
+                setSaved(true)
+                setCurrentLevel(selectedLevel.val)
+                console.log('User level updated successfully');
+            } catch (error) {
+                console.error('Error updating user level:', error);
+            }
         }
+        setTimeout(() => {
+            ResetHidden();
+            setSaved(false)
+        }, 4000);
     };
+
+    // const handleModalClose = () => {
+    //     if (isSaved) {
+    //         const modal = modalRef.current;
+    //         const bootstrapModal = new Modal(modal);
+    //         bootstrapModal.hide();
+    //         setClose(false);
+    //     }
+    // };
+
 
     return (
         <div ref={modalRef} className="modal fade" id="admin-modal" tabIndex="-1" aria-hidden="true">
@@ -67,7 +103,7 @@ export function AdminModal() {
                     <div className="modal-body">
                         <Select
                             options={users.length > 0 ? users.map((user) => ({ name: user.username, val: user.username, level: user.level })) : []}
-                            value={selectedUser} onChange={handleUserChange} label="Choose a user:" />
+                            value={selectedUser} onChange={handleUserChange} label="User:" />
 
                         <div className="row mb-3">
                             <label className="col-sm-4 col-form-label">Current Level:</label>
@@ -81,9 +117,15 @@ export function AdminModal() {
                                 </div>
                             </div>
                         </div>
-                        <Select options={levels} value={selectedLevel} onChange={handleLevelChange} label="Choose a level:" />
+                        <Select options={levels} value={selectedLevel} onChange={handleLevelChange} label="New Level:" />
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-primary" id="save" onClick={saveUserLevel} data-bs-dismiss="modal" aria-label="Close">
+                            {isSaved? <label className="col-sm-4 col-form-label">Saved!</label>: <></>}
+                            <button type="button" className="btn btn-primary" id="save"
+                                onClick={e => {
+                                    e.preventDefault();
+                                    saveUserLevel()
+                                    // handleModalClose()
+                                }} aria-label="Close">
                                 Save
                             </button>
                         </div>

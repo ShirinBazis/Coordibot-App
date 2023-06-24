@@ -23,6 +23,9 @@ export default function Register() {
                 }, 5000);
             }
         };
+        setTimeout(() => {
+            ResetHidden();
+        }, 4000);
     }
 
 

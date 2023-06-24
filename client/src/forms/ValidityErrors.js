@@ -9,18 +9,18 @@ export function GetError({ inputName }) {
             return 'Please enter a Nickname'
         case 'Password Verification':
             return 'Please enter a Password Verification'
-        default:
-            return 'Missing content'
-    }
-}
-
-export default function ValidityErrors({ inputName }) {
-    switch (inputName) {
-        case 'Username':
-            return 'This username is already in use, please choose other name'
-        case 'Password':
-            return 'This password is too short, please choose password includes at least 4 character and not more than 20'
-        case 'Nickname':
+        case 'Meeting Title':
+            return 'Please enter a Meeting Title'
+        case 'Description':
+            return 'Please enter a Description'
+        case 'Invited':
+            return 'Please choose Invited'
+        case 'Location':
+            return 'Please choose Location'
+        case 'User:':
+            return 'Please choose user'
+        case 'New Level:':
+            return 'Please choose new level'
         default:
             return 'Missing content'
     }

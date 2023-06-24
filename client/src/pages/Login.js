@@ -50,6 +50,9 @@ export default function Login() {
                 }, 3000);
             });
         }
+        setTimeout(() => {
+            ResetHidden();
+        }, 3000);
     }
 
     return (

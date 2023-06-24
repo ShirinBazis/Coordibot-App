@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import styles from "../css/select.module.css"
+import { GetError } from '../forms/ValidityErrors';
+
 
 export const SelectOption = {
     name: "",
@@ -23,7 +25,7 @@ const SelectProps = {
     options: []
 } & (SingleSelectProps | MultipleSelectProps)
 
-export default function Select({ multiple, value, onChange, options, label }) {
+export default function Select({ multiple, value, onChange, options, label, isRequired = ""}) {
     const [isOpen, setIsOpen] = useState(false)
     const [highlightedIndex, setHighlightedIndex] = useState(0)
     const containerRef = useRef(null);
@@ -95,7 +97,13 @@ export default function Select({ multiple, value, onChange, options, label }) {
 
     return (
         <div className="row mb-3">
-            <label className="col-sm-4 col-form-label">{label}</label>
+            <div className="col-sm-4 col-form-label">
+            <label htmlFor={label}>{label}</label>
+            {isRequired !== "" ?
+                (<label className="required" htmlFor={isRequired}>* Required</label>)
+                : null}
+            </div>
+
             <div className="col-sm-6">
 
                 <div
@@ -162,7 +170,7 @@ export default function Select({ multiple, value, onChange, options, label }) {
                         ))}
                     </ul>
                 </div>
-
+                <div className="hidden" id={label}><GetError inputName={label} /></div>
             </div>
         </div>
     )
