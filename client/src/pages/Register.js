@@ -22,7 +22,10 @@ export default function Register() {
                     setShowError(false);
                 }, 5000);
             }
-        }
+        };
+        setTimeout(() => {
+            ResetHidden();
+        }, 4000);
     }
 
 
