@@ -5,7 +5,6 @@ import styles from "../css/select.module.css"
 import ResetHidden from '../forms/ResetHidden';
 import ShowHidden from '../forms/ShowHidden';
 import { Modal } from 'bootstrap';
-import React, {useRef, useState, useEffect} from 'react'
 import {UPDATE_LEVEL_URL, USERS_URL} from "../pages/consts";
 
 

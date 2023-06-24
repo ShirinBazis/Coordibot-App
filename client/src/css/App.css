@@ -343,6 +343,7 @@ label {
 
 .toregister, .col-form-label, .form-check-label {
   color: white;
+  margin-right: 20px;
 }
 
 
@@ -490,6 +491,7 @@ label {
 
 .modal-content {
   background-color: var(--firstColor);
+  width: 70%;
 }
 
 .btn-primary {
