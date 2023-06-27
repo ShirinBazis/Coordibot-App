@@ -7,6 +7,7 @@ import { MAKE_MEETING_URL, ARRANGE_MEETING_URL, ROBOT_STATUS_URL, LEVEL_URL } fr
 import { AdminModal } from '../forms/Modals';
 import ResetHidden from '../forms/ResetHidden';
 import ShowHidden from '../forms/ShowHidden';
+import ProgressBar from '../components/ProgressBar';
 
 
 
@@ -170,6 +171,7 @@ export default function SetMeeting() {
     <form id="myForm" className='cube meetings-form'>
       <h1 className='hello'>Hello {currentUser} !</h1>
       <h3>Please set a meeting</h3>
+      <ProgressBar/>
       <hr></hr>
       <div className='meetings'>
         <Input inputName="Meeting Title" inputType="text" text="Meeting Title" isRequired="yes" />
