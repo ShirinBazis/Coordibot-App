@@ -34,3 +34,9 @@ In addition, we have *bonus* featers as described below:
 
 
 
+![image](https://github.com/ShirinBazis/Coordibot-App/assets/92336875/60a62708-460a-4704-b69b-eff9294e3624)
+
+
+![image](https://github.com/ShirinBazis/Coordibot-App/assets/92336875/066a7343-451c-4b3e-9ae6-a6b699a0bc45)
+
+
