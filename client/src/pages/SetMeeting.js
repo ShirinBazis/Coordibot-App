@@ -3,7 +3,7 @@ import Input from '../tags/Input';
 import Select from '../tags/Select';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import { MAKE_MEETING_URL, ARRANGE_MEETING_URL, ROBOT_STATUS_URL, LEVEL_URL } from './consts';
+import { MAKE_MEETING_URL, ARRANGE_MEETING_URL, STATUS_URL, LEVEL_URL } from './consts';
 import { AdminModal } from '../forms/Modals';
 import ResetHidden from '../forms/ResetHidden';
 import ShowHidden from '../forms/ShowHidden';
@@ -103,7 +103,7 @@ export default function SetMeeting() {
   const fetchData = React.useCallback(async () => {
     if (isLogged) {
       try {
-        const res = await axios.get(ROBOT_STATUS_URL);
+        const res = await axios.get(STATUS_URL);
         setIsAvailable(res.data.data.status === 'available');
       } catch (err) {
         console.error(err);
