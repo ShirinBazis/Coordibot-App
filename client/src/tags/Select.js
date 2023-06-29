@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react"
+import { useEffect, useRef, useState } from "react"
 import styles from "../css/select.module.css"
 import { GetError } from '../forms/ValidityErrors';
 
@@ -27,7 +27,7 @@ const SelectProps = {
     options: []
 } & (SingleSelectProps | MultipleSelectProps)
 
-export default function Select({ multiple, value, onChange, options, label, isRequired = ""}) {
+export default function Select({ multiple, value, onChange, options, label, isRequired = "" }) {
     const [isOpen, setIsOpen] = useState(false)
     const [highlightedIndex, setHighlightedIndex] = useState(0)
     const containerRef = useRef(null);
@@ -36,6 +36,11 @@ export default function Select({ multiple, value, onChange, options, label, isRe
     function clearOptions() {
         // multiple ? onChange([]) : onChange(undefined)
         onChange([])
+    }
+
+    const clearOption = (option) => {
+        const updatedValue = value.filter(o => o !== option);
+        onChange(updatedValue);
     }
 
     function selectOption(option) {
@@ -124,8 +129,12 @@ export default function Select({ multiple, value, onChange, options, label, isRe
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             e.preventDefault();
-                                            setIsOpen((prev) => !prev);
+                                            setIsOpen(false)
+                                            //setIsOpen((prev) => !prev);
+                                            const updatedValue = value.filter(o => o !== v);
+                                            onChange(updatedValue);
                                             selectOption(v);
+                                            
                                         }}
                                         className={styles["option-badge"]}
                                     >
@@ -173,7 +182,7 @@ export default function Select({ multiple, value, onChange, options, label, isRe
                     </ul>
                 </div>
                 <div className="hidden" id={label}><GetError inputName={label} /></div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
