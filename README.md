@@ -2,32 +2,32 @@
 
 ## Instructions:
 
-Make sure I have node version 18+ and npm version 8+ installed on your machine.
+#### 'Make sure I have node version 18+ and npm version 8+ installed on your machine.'
 
 
 In the project directory, you should:
 
-### `1. Run npm install -g concurrently (If not already installed)`
-### `2. Run npm install`
+#### `1. Run npm install -g concurrently (If not already installed)`
+#### `2. Run npm install`
 
 
-### `3. Run npm start`
+#### `3. Run npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 
-### `4. Register`
+#### `4. Register`
 
 Add new users to the database.
 
-### `5. Log in`
+#### `5. Log in`
 
 Log in with one of your new users.
 
 * As a *bonus* feater, you can log in with linux terminal!
 
-### `6. Set meetings`
+#### `6. Set meetings`
 
 You can set a meeting that is sent directly to the robot.
 
