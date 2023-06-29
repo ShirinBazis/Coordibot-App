@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import SetMeeting from "./pages/SetMeeting"
 import CoolLogin from "./pages/CoolLogin";
+import ProgressBar from "./pages/progressBar"
 import './css/App.css';
 import './css/CoolLogin.css'
 
@@ -21,6 +22,7 @@ export default function App() {
                 <Route path="/cool-login" element={<CoolLogin/>}></Route>
                 <Route path="/register" element={<Register/>}></Route>
                 <Route path="/meetings" element={<SetMeeting/>}></Route>
+                <Route path="/progress" element={<ProgressBar/>}></Route>
             </Routes>
         </Router>
     );
