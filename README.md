@@ -2,7 +2,7 @@
 
 ## Instructions:
 
-#### 'Make sure I have node version 18+ and npm version 8+ installed on your machine.'
+#### 'Make sure you have node version 18+ and npm version 8+ installed on your machine.'
 
 
 In the project directory, you should:
