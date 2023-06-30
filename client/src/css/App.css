@@ -346,6 +346,12 @@ label {
   margin-right: 20px;
 }
 
+.form-switch {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;;
+}
+
 
 .logout, .admin {
     display: flex;
@@ -478,8 +484,8 @@ label {
 
 .btns {
     align-items: center;
+    justify-content: space-around;
     display: flex;
-    margin-left: 30px;
 }
 
 .extraBtns {
