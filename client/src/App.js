@@ -12,6 +12,7 @@ import './css/List.css'
 
 export default function App() {
     const [currentUser, setCurrentUser] = useState('');
+    const [optionalLecturers, setLecturers] = useState([]);
     useEffect(() => {
         setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
     }, [currentUser])
@@ -23,8 +24,8 @@ export default function App() {
                 <Route path="/login" element={<Login/>}></Route>
                 <Route path="/cool-login" element={<CoolLogin/>}></Route>
                 <Route path="/register" element={<Register/>}></Route>
-                <Route path="/meetings" element={<SetMeeting/>}></Route>
-                <Route path="/progress" element={<ProgressBar/>}></Route>
+                <Route path="/meetings" element={<SetMeeting optionalLecturers={optionalLecturers} setLecturers={setLecturers}/>}></Route>
+                <Route path="/progress" element={<ProgressBar optionalLecturers={optionalLecturers} />}></Route>
             </Routes>
         </Router>
     );
