@@ -13,61 +13,60 @@ import Togglebtn from '../components/Togglebtn';
 
 
 export const lecturers = [
-  {name: "Talya Eden", val: 303},
-  {name: "Liam Roditty", val: 304},
-  {name: "Ester Ezra", val: 305},
-  {name: "Ely Porat", val: 306},
-  {name: "Arnold Filtser", val: 307},
-  {name: "Tsvi Kopelowitz", val: 308},
-  {name: "Amihood Amir", val: 310},
-  {name: "Sarit Kraus", val: 315},
-  {name: "David Sarne", val: 316},
-  {name: "Yoni Zohar", val: 319},
-  {name: "Noa Agmon", val: 320},
-  {name: "Gal Kaminka", val: 321},
-  {name: "Reuth Mirsky", val: 322},
-  {name: "Alex Shleyfman", val: 323},
-  {name: "Hana Weitman", val: 324},
+  { name: "Talya Eden", val: 303 },
+  { name: "Liam Roditty", val: 304 },
+  { name: "Ester Ezra", val: 305 },
+  { name: "Ely Porat", val: 306 },
+  { name: "Arnold Filtser", val: 307 },
+  { name: "Tsvi Kopelowitz", val: 308 },
+  { name: "Amihood Amir", val: 310 },
+  { name: "Sarit Kraus", val: 315 },
+  { name: "David Sarne", val: 316 },
+  { name: "Yoni Zohar", val: 319 },
+  { name: "Noa Agmon", val: 320 },
+  { name: "Gal Kaminka", val: 321 },
+  { name: "Reuth Mirsky", val: 322 },
+  { name: "Alex Shleyfman", val: 323 },
+  { name: "Hana Weitman", val: 324 },
 ];
 
 const rooms = [
-  {name: "", val: 301},
-  {name: "", val: 302},
-  {name: "Talya Eden", val: 303},
-  {name: "Liam Roditty", val: 304},
-  {name: "Ester Ezra", val: 305},
-  {name: "Ely Porat", val: 306},
-  {name: "Arnold Filtser", val: 307},
-  {name: "Tsvi Kopelowitz", val: 308},
-  {name: "", val: 309},
-  {name: "Amihood Amir", val: 310},
-  {name: "", val: 311},
-  {name: "", val: 312},
-  {name: "", val: 313},
-  {name: "", val: 314},
-  {name: "Sarit Kraus", val: 315},
-  {name: "David Sarne", val: 316},
-  {name: "", val: 317},
-  {name: "", val: 318},
-  {name: "Yoni Zohar", val: 319},
-  {name: "Noa Agmon", val: 320},
-  {name: "Gal Kaminka", val: 321},
-  {name: "Reuth Mirsky", val: 322},
-  {name: "Alex Shleyfman", val: 323},
-  {name: "Hana Weitman", val: 324},
-  {name: "", val: 325},
-  {name: "", val: 327},
-  {name: "", val: 328},
-  {name: "", val: 329},
-  {name: "", val: 331},
+  { name: "", val: 301 },
+  { name: "", val: 302 },
+  { name: "Talya Eden", val: 303 },
+  { name: "Liam Roditty", val: 304 },
+  { name: "Ester Ezra", val: 305 },
+  { name: "Ely Porat", val: 306 },
+  { name: "Arnold Filtser", val: 307 },
+  { name: "Tsvi Kopelowitz", val: 308 },
+  { name: "", val: 309 },
+  { name: "Amihood Amir", val: 310 },
+  { name: "", val: 311 },
+  { name: "", val: 312 },
+  { name: "", val: 313 },
+  { name: "", val: 314 },
+  { name: "Sarit Kraus", val: 315 },
+  { name: "David Sarne", val: 316 },
+  { name: "", val: 317 },
+  { name: "", val: 318 },
+  { name: "Yoni Zohar", val: 319 },
+  { name: "Noa Agmon", val: 320 },
+  { name: "Gal Kaminka", val: 321 },
+  { name: "Reuth Mirsky", val: 322 },
+  { name: "Alex Shleyfman", val: 323 },
+  { name: "Hana Weitman", val: 324 },
+  { name: "", val: 325 },
+  { name: "", val: 327 },
+  { name: "", val: 328 },
+  { name: "", val: 329 },
+  { name: "", val: 331 },
 ];
 
 
-export default function SetMeeting() {
+export default function SetMeeting({ optionalLecturers, setLecturers }) {
   let navigate = useNavigate();
   const [isLogged, setIsLogged] = useState(false);
   const [didUserSetMeeting, setDidUserSetMeeting] = useState(false);
-  const [optionalLecturers, setLecturers] = useState([]);
   const [isAvailable, setIsAvailable] = useState(false);
   const [optionalRooms, setRoom] = useState('');
   const isBusyMessage = isAvailable ? "" : ""
@@ -107,6 +106,7 @@ export default function SetMeeting() {
         const res = await axios.get(STATUS_URL);
         setIsAvailable(res.data.data.status === 'available');
       } catch (err) {
+        setIsAvailable(false);
         console.error(err);
       }
     }
@@ -115,9 +115,10 @@ export default function SetMeeting() {
   React.useEffect(() => {
     fetchData();
     intervalId.current = setInterval(fetchData, 10000);
+    console.log('intervalId.current:', intervalId.current);
     return () => {
       setIsLogged(false);
-      clearInterval(intervalId.current);
+      //clearInterval(intervalId.current);
     };
   }, [fetchData, isLogged]);
 
@@ -129,7 +130,7 @@ export default function SetMeeting() {
   }
 
   const handleSetMeeting = async () => {
-    fetchData();
+    await fetchData();
     const MeetingTitle = document.getElementById('Meeting Title').value;
     const Description = document.getElementById('Description').value;
     const InvitedRooms = optionalLecturers.map(item => item.val);
@@ -145,7 +146,13 @@ export default function SetMeeting() {
           "location": LocationRoom
         });
         setDidUserSetMeeting(true);
-        alert("Estimated Time: " + response?.data?.data?.estimatedTime.toFixed(2) + " minutes")
+        let totalSeconds = response?.data?.data?.estimatedTime;
+        let minutes = Math.floor(totalSeconds / 60);
+        let seconds = Math.floor(totalSeconds % 60);
+        alert("Estimated Time: " +
+          (minutes > 0 ? minutes + " minute(s) " : "") +
+          (seconds > 0 ? seconds + " second(s)" : ""));
+
 
       } catch (error) {
         console.error(error?.response?.data);
@@ -185,7 +192,7 @@ export default function SetMeeting() {
               {/* without the word checked = busy */}
               {/* <input className="form-check-input" type="checkbox" role="switch"
                 id="flexSwitchCheckCheckedDisabled" checked={isAvailable} disabled /> */}
-              <Togglebtn isAvailable={isAvailable}/>
+              <Togglebtn isAvailable={isAvailable} />
               <label className="form-check-label"
                 htmlFor="flexSwitchCheckCheckedDisabled">{isBusyMessage}</label>
             </div>
