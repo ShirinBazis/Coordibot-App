@@ -8,6 +8,7 @@ import ProgressBar from "./pages/progressBar"
 import './css/App.css';
 import './css/CoolLogin.css'
 import './css/Togglebtn.css'
+import './css/List.css'
 
 export default function App() {
     const [currentUser, setCurrentUser] = useState('');

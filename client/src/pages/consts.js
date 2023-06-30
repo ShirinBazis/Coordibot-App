@@ -3,6 +3,7 @@ export const LOGIN_URL = APP_SERVER_URL + '/login';
 export const LEVEL_URL = APP_SERVER_URL + '/level';
 export const USERS_URL = APP_SERVER_URL + '/users';
 export const PROGRESS_URL = APP_SERVER_URL + '/progress';
+export const NOTIFIED_URL = APP_SERVER_URL + '/notified';
 export const UPDATE_LEVEL_URL = APP_SERVER_URL + '/update-user-level';
 export const ARRANGE_MEETING_URL = APP_SERVER_URL + '/arrangeMeeting';
 export const MAKE_MEETING_URL = APP_SERVER_URL + '/makeMeeting';

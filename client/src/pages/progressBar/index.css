@@ -6,7 +6,7 @@ body {
 
 .centered-div {
   width: 800px;
-  height: 300px;
+  height: auto;
   position: absolute;
   background-color: rgba(44, 43, 43, 0.8);
   top: 50%;
