@@ -68,7 +68,7 @@ function CoolLogin() {
                 </div>
                 <div className="terminal_body">
                     {displayArr}
-                    <input style={{opacity: '0', position: 'absolute', width: '100%'}} value={input} autoFocus
+                    <input style={{opacity: '0%', position: 'absolute', width: '600px'}} value={input} autoFocus
                            onKeyDown={handleKeyDown} onChange={(e) => setInput(e.target.value)}></input>
                     <Line flag={1} type={count.current === true ? "Username" : "Password"} text={input}></Line>
                 </div>

@@ -8,6 +8,7 @@ import { AdminModal } from '../forms/Modals';
 import ResetHidden from '../forms/ResetHidden';
 import ShowHidden from '../forms/ShowHidden';
 import ProgressBar from '../components/ProgressBar';
+import Togglebtn from '../components/Togglebtn';
 
 
 
@@ -69,7 +70,7 @@ export default function SetMeeting() {
   const [optionalLecturers, setLecturers] = useState([]);
   const [isAvailable, setIsAvailable] = useState(false);
   const [optionalRooms, setRoom] = useState('');
-  const isBusyMessage = isAvailable ? "The robot is free right now!" : "The robot is busy right now"
+  const isBusyMessage = isAvailable ? "" : ""
   const [isAdmin, setIsAdmin] = useState(false);
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const intervalId = useRef(null);
@@ -171,7 +172,6 @@ export default function SetMeeting() {
     <form id="myForm" className='cube meetings-form'>
       <h1 className='hello'>Hello {currentUser} !</h1>
       <h3>Please set a meeting</h3>
-      <ProgressBar/>
       <hr></hr>
       <div className='meetings'>
         <Input inputName="Meeting Title" inputType="text" text="Meeting Title" isRequired="yes" />
@@ -183,8 +183,9 @@ export default function SetMeeting() {
           <div className="col-sm-6">
             <div className="form-check form-switch">
               {/* without the word checked = busy */}
-              <input className="form-check-input" type="checkbox" role="switch"
-                id="flexSwitchCheckCheckedDisabled" checked={isAvailable} disabled />
+              {/* <input className="form-check-input" type="checkbox" role="switch"
+                id="flexSwitchCheckCheckedDisabled" checked={isAvailable} disabled /> */}
+              <Togglebtn isAvailable={isAvailable}/>
               <label className="form-check-label"
                 htmlFor="flexSwitchCheckCheckedDisabled">{isBusyMessage}</label>
             </div>
