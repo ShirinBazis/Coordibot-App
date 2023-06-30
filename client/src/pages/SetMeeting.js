@@ -12,7 +12,7 @@ import Togglebtn from '../components/Togglebtn';
 
 
 
-const lecturers = [
+export const lecturers = [
   {name: "Talya Eden", val: 303},
   {name: "Liam Roditty", val: 304},
   {name: "Ester Ezra", val: 305},

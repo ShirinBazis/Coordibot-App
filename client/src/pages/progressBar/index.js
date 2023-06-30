@@ -1,6 +1,7 @@
 import React from 'react';
 import { PROGRESS_URL } from '../consts'
 import './index.css';
+import List from '../../components/List';
 
 const ProgressBar = () => {
   const [progress, setProgress] = React.useState(0);
@@ -41,6 +42,7 @@ const ProgressBar = () => {
       </div>
       {progress >= 0 && <Bar />}
       {progress < 0 && (<span>The robot encountered a problem</span>)}
+      <List />
     </div>
   );
 };
