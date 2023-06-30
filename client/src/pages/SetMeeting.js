@@ -68,6 +68,8 @@ export default function SetMeeting({ optionalLecturers, setLecturers }) {
   const [isLogged, setIsLogged] = useState(false);
   const [didUserSetMeeting, setDidUserSetMeeting] = useState(false);
   const [isAvailable, setIsAvailable] = useState(false);
+  const [levelError, setLevelError] = useState(false);
+  const [userLevel , setUserLevel] = useState(0);
   const [optionalRooms, setRoom] = useState('');
   const isBusyMessage = isAvailable ? "" : ""
   const [isAdmin, setIsAdmin] = useState(false);
@@ -83,6 +85,7 @@ export default function SetMeeting({ optionalLecturers, setLecturers }) {
         });
         const level = response.data;
         setIsAdmin(level === 2);
+        setUserLevel(level);
       } catch (error) {
         console.error('Error retrieving user admin status:', error);
       }
@@ -130,6 +133,10 @@ export default function SetMeeting({ optionalLecturers, setLecturers }) {
   }
 
   const handleSetMeeting = async () => {
+    if (userLevel === 0) {
+      setLevelError(true);
+      return;
+    }
     await fetchData();
     const MeetingTitle = document.getElementById('Meeting Title').value;
     const Description = document.getElementById('Description').value;
@@ -179,6 +186,7 @@ export default function SetMeeting({ optionalLecturers, setLecturers }) {
     <form id="myForm" className='cube meetings-form'>
       <h1 className='hello'>Hello {currentUser} !</h1>
       <h3>Please set a meeting</h3>
+      {levelError && <div className="alert alert-danger">You don't have sufficient permissions </div>}
       <hr></hr>
       <div className='meetings'>
         <Input inputName="Meeting Title" inputType="text" text="Meeting Title" isRequired="yes" />

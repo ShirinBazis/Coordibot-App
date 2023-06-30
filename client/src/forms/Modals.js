@@ -51,19 +51,6 @@ export function AdminModal() {
     const saveUserLevel = () => {
         if (ShowHidden(selectedUser.name, selectedLevel.val, true)) {
             try {
-                // const button = document.getElementById('save');
-                // button.dataset.bsDismiss = 'modal';
-                // button.classList.remove('show');
-                // button.style.display = 'none';
-
-                // const modal = document.getElementById('admin-modal');
-                // modal.dataset.bsDismiss = 'modal';
-                // modal.classList.remove('show');
-                // modal.style.display = 'none';
-                // modal.classList.add('hide')
-                // modal.setAttribute('aria-hidden', 'false');
-                // document.body.classList.remove('modal-open');
-
                 console.log(selectedUser.name, selectedLevel.val)
                 axios.post('http://localhost:4000/update-user-level', {
                     username: selectedUser.name,
@@ -81,16 +68,6 @@ export function AdminModal() {
             setSaved(false)
         }, 4000);
     };
-
-    // const handleModalClose = () => {
-    //     if (isSaved) {
-    //         const modal = modalRef.current;
-    //         const bootstrapModal = new Modal(modal);
-    //         bootstrapModal.hide();
-    //         setClose(false);
-    //     }
-    // };
-
 
     return (
         <div ref={modalRef} className="modal fade" id="admin-modal" tabIndex="-1" aria-hidden="true">
