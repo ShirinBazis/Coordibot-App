@@ -39,11 +39,20 @@ body {
 
 .fill {
   height: 100%;
-  background-color: #d22640;
   transition: width 0.3s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #d22640;
+}
+
+.fill-complete {
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0fae279d;
 }
 
 .label_0{

@@ -3,15 +3,16 @@ import { PROGRESS_URL } from '../consts'
 import './index.css';
 
 const ProgressBar = () => {
-  const [progress, setProgress] = React.useState(65);
+  const [progress, setProgress] = React.useState(0);
   React.useEffect(() => {
     const fetchData = () => {
       fetch(PROGRESS_URL)
         .then(response => response.json())
         .then(data => {
-          console.log(data);
+          setProgress(data.data.progress)
         })
         .catch(error => {
+          setProgress(-1)
           console.error('Error:', error);
         });
     };
@@ -21,10 +22,12 @@ const ProgressBar = () => {
   }, []);
 
   const Bar = () => {
+    const fillClassName = progress === 100 ? 'fill-complete' : 'fill';
+
     return (
       <div className="progress-bar">
-        {progress==0 && <div className='label_0'>0%</div>}
-        <div className="fill" style={{ width: `${progress}%` }}>
+        {progress === 0 && <div className='label_0'>0%</div>}
+        <div className={fillClassName} style={{ width: `${progress}%` }}>
           {progress && <div className="progress-text">{progress}%</div>}
         </div>
       </div>

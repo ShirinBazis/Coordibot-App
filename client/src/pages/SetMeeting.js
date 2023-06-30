@@ -137,7 +137,7 @@ export default function SetMeeting() {
       // send request to the robot
       try {
         const response = await axios.post(ARRANGE_MEETING_URL, {
-          "requester_id": 303,
+          "requester_id": currentUser,
           "title": MeetingTitle,
           "description": Description,
           "invited": InvitedRooms,
@@ -160,7 +160,7 @@ export default function SetMeeting() {
       const response = await axios.post(MAKE_MEETING_URL, {
         "requester_id": currentUser,
       });
-      alert(response?.data.data.msg)
+      navigate("/progress");
     } catch (error) {
       console.error(error?.response?.data);
     }
@@ -171,7 +171,6 @@ export default function SetMeeting() {
     <form id="myForm" className='cube meetings-form'>
       <h1 className='hello'>Hello {currentUser} !</h1>
       <h3>Please set a meeting</h3>
-      <ProgressBar/>
       <hr></hr>
       <div className='meetings'>
         <Input inputName="Meeting Title" inputType="text" text="Meeting Title" isRequired="yes" />
