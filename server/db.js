@@ -118,7 +118,6 @@ export async function getLevel(username) {
     try {
         await connectToServer();
         const user = await User.findOne({username});
-        console.log("user:", user)
         return user.level;
     } catch (err) {
         console.error(err);

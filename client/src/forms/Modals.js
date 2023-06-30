@@ -51,14 +51,12 @@ export function AdminModal() {
     const saveUserLevel = () => {
         if (ShowHidden(selectedUser.name, selectedLevel.val, true)) {
             try {
-                console.log(selectedUser.name, selectedLevel.val)
                 axios.post('http://localhost:4000/update-user-level', {
                     username: selectedUser.name,
                     newLevel: selectedLevel.val,
                 });
                 setSaved(true)
                 setCurrentLevel(selectedLevel.val)
-                console.log('User level updated successfully');
             } catch (error) {
                 console.error('Error updating user level:', error);
             }

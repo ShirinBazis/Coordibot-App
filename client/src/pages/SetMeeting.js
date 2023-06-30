@@ -118,7 +118,6 @@ export default function SetMeeting({ optionalLecturers, setLecturers }) {
   React.useEffect(() => {
     fetchData();
     intervalId.current = setInterval(fetchData, 10000);
-    console.log('intervalId.current:', intervalId.current);
     return () => {
       setIsLogged(false);
       //clearInterval(intervalId.current);
