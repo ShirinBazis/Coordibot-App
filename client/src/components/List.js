@@ -32,9 +32,7 @@ function List({ optionalLecturers, progress }) {
                 .then(data => {
                     if (data.data.notified !== "") {
                     let notified = data.data.notified.split(',');
-                    let [, ...notified_arr] = notified;
-                    console.log("final:", notified_arr);
-                    setNotified(notified_arr);
+                    setNotified(notified);
                     }
                 })
                 .catch(error => {

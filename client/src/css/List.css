@@ -27,7 +27,7 @@
     display: grid;
     align-items: center;
     width: fit-content;
-    transition: color 0.3s ease;
+    transition: color 1s ease;
     margin-right: 20px;
   }
   
@@ -42,7 +42,7 @@
     left: -27px;
     background: var(--check);
     border-radius: 2px;
-    transition: background 0.3s ease;
+    transition: background 1s ease;
   }
   
   #checklist label:after {
