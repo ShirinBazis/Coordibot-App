@@ -6,7 +6,7 @@
 
 
 In the project directory, you should:
-
+#### `0. Modify the server address in the `/server/consts.js` file to match the address where the robot is currently operating.`
 #### `1. Run npm install -g concurrently (If not already installed)`
 #### `2. Run npm install`
 
