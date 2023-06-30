@@ -3,7 +3,7 @@ import Input from '../tags/Input';
 import Select from '../tags/Select';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import { MAKE_MEETING_URL, ARRANGE_MEETING_URL, ROBOT_STATUS_URL, LEVEL_URL } from './consts';
+import { MAKE_MEETING_URL, ARRANGE_MEETING_URL, STATUS_URL, LEVEL_URL } from './consts';
 import { AdminModal } from '../forms/Modals';
 import ResetHidden from '../forms/ResetHidden';
 import ShowHidden from '../forms/ShowHidden';
@@ -104,7 +104,7 @@ export default function SetMeeting() {
   const fetchData = React.useCallback(async () => {
     if (isLogged) {
       try {
-        const res = await axios.get(ROBOT_STATUS_URL);
+        const res = await axios.get(STATUS_URL);
         setIsAvailable(res.data.data.status === 'available');
       } catch (err) {
         console.error(err);
@@ -138,7 +138,7 @@ export default function SetMeeting() {
       // send request to the robot
       try {
         const response = await axios.post(ARRANGE_MEETING_URL, {
-          "requester_id": 303,
+          "requester_id": currentUser,
           "title": MeetingTitle,
           "description": Description,
           "invited": InvitedRooms,
@@ -161,7 +161,7 @@ export default function SetMeeting() {
       const response = await axios.post(MAKE_MEETING_URL, {
         "requester_id": currentUser,
       });
-      alert(response?.data.data.msg)
+      navigate("/progress");
     } catch (error) {
       console.error(error?.response?.data);
     }

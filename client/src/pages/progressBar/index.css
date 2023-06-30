@@ -1,0 +1,61 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.centered-div {
+  width: 800px;
+  height: 300px;
+  position: absolute;
+  background-color: rgba(44, 43, 43, 0.8);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 1.5em;
+}
+
+.progress-bar {
+  width: 80%;
+  height: 100px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.progress-dicription {
+  width: 80%;
+  color: #ffffff;
+  margin-bottom: 40px;
+  font-size: 2em;
+}
+
+.fill {
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d22640;
+}
+
+.fill-complete {
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0fae279d;
+}
+
+.label_0{
+  color: #d22640;
+  padding-top: 5%;
+}

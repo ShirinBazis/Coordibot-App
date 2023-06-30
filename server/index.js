@@ -2,7 +2,7 @@ import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
 import {validateLogin, addUser, getAllUsers, getLevel, updateUserLevel} from './db.js';
-import {MAKE_MEETING_URL, ARRANGE_MEETING_URL, ROBOT_STATUS_URL} from './consts.js';
+import {MAKE_MEETING_URL, ARRANGE_MEETING_URL, ROBOT_STATUS_URL, ROBOT_PROGRESS_URL} from './consts.js';
 
 
 const app = express();
@@ -103,6 +103,17 @@ app.post('/update-user-level', async (req, res) => {
 app.get('/status', async (req, res) => {
     try {
         const response = await axios.get(ROBOT_STATUS_URL);
+        const status = response.data;
+        res.status(200).json(status);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
+
+app.get('/progress', async (req, res) => {
+    try {
+        const response = await axios.get(ROBOT_PROGRESS_URL);
         const status = response.data;
         res.status(200).json(status);
     } catch (error) {
